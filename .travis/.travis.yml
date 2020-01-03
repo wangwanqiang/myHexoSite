@@ -1,0 +1,3 @@
+before_install:
+- openssl aes-256-cbc -K $encrypted_7052beb07896_key -iv $encrypted_7052beb07896_iv
+  -in hexo_id_pub.enc -out hexo_id_pub -d
