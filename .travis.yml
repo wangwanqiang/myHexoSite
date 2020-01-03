@@ -1,16 +1,10 @@
 language: node_js 
-node_js: '8.9.3'
-cache: npm 
+node_js: stable
 
 dist: trusty
 sudo: required
 
-branches:
-  only:
-  - source
-
 before_install:
-  - gem install bundler
   - npm install -g hexo-cli
 
 install:
