@@ -1,0 +1,26 @@
+language: node_js             # 指定语言环境
+node_js: '8.9.3'              # 指定 NodeJS 版本
+cache: npm                    # 指定 npm 缓存方案，会缓存 $HOME/.npm 或 node_modules 文件夹
+
+dist: trusty                  # 指定系统版本，trusty 是指 Ubuntu 14.04 发行版的名称
+sudo: required                # 是否需要 sudo 权限
+
+branches:                     # 指定要构建的分支
+  only:                       # only 表示只构建以下分支
+  - source
+
+before_install:               # install 阶段之前执行
+  - npm install -g hexo-cli   # 全局安装 Hexo 命令行工具
+
+install:                      # 在安装项目环境阶段需要运行的命令，一条一行，类似的还有 before_install
+  - npm install               # 安装 package.json 中的依赖
+
+script:                       # 在构建阶段需要运行的命令，一条一行，类似的还有 before_script、after_script
+  - hexo clean
+  - hexo generate             # Hexo 常规命令，执行清理和生成
+
+after_success:                # script 阶段成功时执行，构建失败不会执行，其他同上
+  - git config --local user.name "travis-ci"
+  - git config --local user.email "deploy@travis-ci.org"
+  - sed -i'' "s~git@github.com:~https://${GITHUB_REPO_TOKEN}@github.com/~" _config.yml
+  - hexo deploy > /dev/null   # 通过 Hexo 的 deploy 命令部署博客
