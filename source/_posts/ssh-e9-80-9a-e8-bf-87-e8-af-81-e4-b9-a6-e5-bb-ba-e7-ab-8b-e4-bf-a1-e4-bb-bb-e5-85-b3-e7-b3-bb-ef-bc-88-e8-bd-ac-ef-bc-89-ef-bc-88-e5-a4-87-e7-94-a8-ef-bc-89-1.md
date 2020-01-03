@@ -1,0 +1,11 @@
+---
+title: ssh 通过证书建立信任关系（转）（备用）
+url: 264.html
+id: 264
+date: 2017-10-17 14:35:06
+tags:
+---
+
+建立SSH信任 将A主机做为客户端（发起SSH请求 ip:192.168.200.170） 将B主机作为服务器端（接收ssh请求 ip:192.168.200.149） 以上以主动发起SSH登录请求的主机和接收请求的主机进行分类 <1>A主机生成公，私钥证书  
+\[root@buddytj-10 .ssh\]# ssh-keygen -t rsa #rsa算法的证书 Generating public/private rsa key pair. （以下一路回车） Enter file in which to save the key (/root/.ssh/id_rsa):  
+/root/.ssh/id\_rsa already exists. Overwrite (y/n)? y （因为我的证书已存在，覆盖即可） Enter passphrase (empty for no passphrase): Enter same passphrase again: Your identification has been saved in /root/.ssh/id\_rsa. （私钥） Your public key has been saved in /root/.ssh/id\_rsa.pub. （公钥） The key fingerprint is: c1:26:cc:88:2b:05:dd:c3:6b:1e:78:5d:da:9c:da:8a 证书就生成了 id\_rsa （私钥）|& id\_rsa.pub （公钥） <2>将A主机生成的公钥传递给B主机 \[root@xyh .ssh\]#scp id\_rsa.pub 192.168.200.149：/root/.ssh/ 在B主机上将A的公钥更名为 \[root@xyh .ssh\]#mv id\_rsa.pub authorized\_keys <3>至此从A主机远程SSH B主机的工作即告完成
