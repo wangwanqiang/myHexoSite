@@ -6,7 +6,9 @@ date: 2018-01-20 14:41:06
 tags:
 ---
 
-`(void)savePreset {
+```object-c
+
+(void)savePreset {
 
     UIAlertController * alertController = [UIAlertController alertControllerWithTitle:@"Preset to Remoter buttons" message:nil preferredStyle:UIAlertControllerStyleActionSheet];
     
@@ -42,4 +44,6 @@ tags:
     [self presentViewController:alertController animated:YES completion:nil];
     
 
-}`
+}
+
+```

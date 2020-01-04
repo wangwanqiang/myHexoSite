@@ -1,7 +1,7 @@
 title: UIAlertController 项添加图标
 author: Wanqiang
 date: 2018-02-17 11:53:29
-tags:
+tags: ios
 ---
 
 下面是示例代码

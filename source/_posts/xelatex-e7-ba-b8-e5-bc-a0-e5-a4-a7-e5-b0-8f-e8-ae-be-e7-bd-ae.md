@@ -7,6 +7,7 @@ date: 2015-05-19 06:06:28
 tags:
 ---
 
+```
 \documentclass[]{article}
 
 \usepackage[T1]{fontenc}
@@ -29,6 +30,7 @@ tags:
 
 % use upquote if available, for straight quotes in verbatim environments
 
+```
 注意加粗的两行。
 
 &nbsp;

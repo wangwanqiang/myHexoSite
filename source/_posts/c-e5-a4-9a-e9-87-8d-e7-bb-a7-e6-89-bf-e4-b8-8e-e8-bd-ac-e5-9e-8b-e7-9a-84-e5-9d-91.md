@@ -2,7 +2,7 @@
 title: C++ 多重继承与转型的坑
 id: 99
 categories:
-  - 未分类
+  - C++
 date: 2015-07-10 06:55:54
 tags:
 ---

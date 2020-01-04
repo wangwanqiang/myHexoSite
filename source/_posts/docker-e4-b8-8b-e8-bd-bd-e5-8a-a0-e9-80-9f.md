@@ -2,7 +2,7 @@
 title: docker 下载加速
 id: 213
 categories:
-  - 未分类
+  - docker
 date: 2017-04-12 21:54:26
 tags:
 ---
