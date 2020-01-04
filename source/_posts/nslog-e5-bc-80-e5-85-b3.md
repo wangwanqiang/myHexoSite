@@ -11,12 +11,12 @@ tags:
 
 在系统包含的公共头文件中加入下面的语句：
 
-`
+```
 #ifndef __OPTIMIZE__
 # define NSLog(...) NSLog(__VA_ARGS__)
 #else
 # define NSLog(...) {}
 #endif
-`
+```
 
 一般情况下，Release版本系统会定义 __OPTIMIZE__ 宏，而Debug版本不会，根据这个差别使用不同的NSLog，从而达到上面的目的。
