@@ -5,6 +5,8 @@ categories:
   - docker
 date: 2016-03-03 10:27:03
 tags:
+  - docker
+  - github
 ---
 
 这里用到了一个第三方的镜像：
