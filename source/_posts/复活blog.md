@@ -23,6 +23,6 @@ tags:
 
 # 如何快速创建一个github个人网站？
 
-克隆一个已经存在的网站:)，比如我这个网站(https://github.com/wangwanqiang/myHexoSite.git)。然后把source目录中的内容删除掉。在调整一下自己的配置就可以了。
+克隆一个已经存在的网站:)，比如我这个[网站](https://github.com/wangwanqiang/myHexoSite.git)。然后把source目录中的内容删除掉。在调整一下自己的配置就可以了。
 
 
