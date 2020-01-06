@@ -207,7 +207,17 @@ public class PdfReportM1HeaderFooter extends PdfPageEventHelper {
 
 Isn't it possible for you to use HtmlConverter#convertToElements method. It returns List as a result and then you can add its elements to a document with set margins:
 
-Document document = new Document(pdfDocument);<br />List list = HtmlConverter.convertToElements(new FileInputStream(htmlSource));<br />for (IElement element : list) {<br />if (element instanceof IBlockElement) {<br />document.add((IBlockElement) element);<br />}<br />}<br />Another approach: in your html just introduce the [@page ]() rule which sets the margins you need, for example:
+```java
+Document document = new Document(pdfDocument);
+List list = HtmlConverter.convertToElements(new FileInputStream(htmlSource));
+for (IElement element : list) {
+if (element instanceof IBlockElement) {
+document.add((IBlockElement) element);
+}
+}
+```
+
+Another approach: in your html just introduce the [@page ]() rule which sets the margins you need, for example:
 
 [@page ]() {<br />margin: 0;<br />}<br />Yet another solution: implement your own custom tag worker for  tag and set margins on its level. For example, to set zero margins one could create tag the next worker:
 
