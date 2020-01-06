@@ -8,7 +8,6 @@ tags:
   - 排版
 ---
 
-# iText学习
 
 <a name="X2pDY"></a>
 # 页眉与页脚
