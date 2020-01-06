@@ -6,6 +6,8 @@ categories:
   - MicroGen8
 date: 2016-05-02 15:28:07
 tags:
+  - linux
+  - MicroGen8
 ---
 
 1.  检查/etc/mdadm/mdadm.conf，内容是对的，但重启后，还是md127.
