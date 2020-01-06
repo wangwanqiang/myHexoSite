@@ -219,7 +219,11 @@ document.add((IBlockElement) element);
 
 Another approach: in your html just introduce the [@page ]() rule which sets the margins you need, for example:
 
-[@page ]() {<br />margin: 0;<br />}<br />Yet another solution: implement your own custom tag worker for  tag and set margins on its level. For example, to set zero margins one could create tag the next worker:
+```css
+[@page ]() {margin: 0;}
+```
+
+Yet another solution: implement your own custom tag worker for  tag and set margins on its level. For example, to set zero margins one could create tag the next worker:
 
 ```java
 public class CustomTagWorkerFactory extends DefaultTagWorkerFactory {
