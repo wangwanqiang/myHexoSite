@@ -5,6 +5,7 @@ categories:
   - git
 date: 2016-03-08 08:27:10
 tags:
+  - git
 ---
 
 # Git 基础使用
