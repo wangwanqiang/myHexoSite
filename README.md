@@ -2,7 +2,7 @@
 
 [![Build Status](https://travis-ci.org/wangwanqiang/myHexoSite.svg?branch=master)](https://travis-ci.org/wangwanqiang/myHexoSite)
 
-SiteSource
+
 
 ## Hexo 文章的文件头
 
