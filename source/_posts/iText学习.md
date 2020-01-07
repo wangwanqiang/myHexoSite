@@ -12,7 +12,26 @@ tags:
 <a name="X2pDY"></a>
 # 页眉与页脚
 
-iText5中并没有之前版本HeaderFooter对象设置页眉和页脚，可以利用PdfPageEventHelper来完成页眉页脚的设置工作。PdfPageEventHelper中包含以下事件处理器。<br />       onOpenDocument() — 当打开一个文档时触发，可以用于初始化文档的全局变量。<br />       onStartPage() — 当一个页面初始化时触发，可用于初始化页面的设置参数，但是注意这个函数触发时，该页面并没有创建好，不用利用这个函数添加内容，最好利用onEndPage()处理页面的初始化。<br />       onEndPage() — 在创建一个新页面完成但写入内容之前触发，是添加页眉、页脚、水印等最佳时机。<br />       onCloseDocument() — 在文档关闭之前触发，可以用于释放一些资源。<br />       onCloseDocument() — 在文档关闭之前触发，可以用于释放一些资源。<br />要想出发事件需要在程序中添加事件<br />如下<br />            PdfReportM1HeaderFooter footer=new PdfReportM1HeaderFooter();<br />            writer.setPageEvent(footer);<br />该类PdfReportM1HeaderFooter继承自PdfPageEventHelper所以可以直接添加、
+iText5中并没有之前版本HeaderFooter对象设置页眉和页脚，可以利用PdfPageEventHelper来完成页眉页脚的设置工作。PdfPageEventHelper中包含以下事件处理器。
+
+```
+onOpenDocument() — 当打开一个文档时触发，可以用于初始化文档的全局变量。
+onStartPage() — 当一个页面初始化时触发，可用于初始化页面的设置参数，但是注意这个函数触发时，该页面并没有创建好，不用利用这个函数添加内容，最好利用onEndPage()处理页面的初始化。
+onEndPage() — 在创建一个新页面完成但写入内容之前触发，是添加页眉、页脚、水印等最佳时机。
+onCloseDocument() — 在文档关闭之前触发，可以用于释放一些资源。
+onCloseDocument() — 在文档关闭之前触发，可以用于释放一些资源。
+```
+
+要想出发事件需要在程序中添加事件
+
+如下
+
+```
+PdfReportM1HeaderFooter footer=new PdfReportM1HeaderFooter();
+writer.setPageEvent(footer);
+```
+
+该类PdfReportM1HeaderFooter继承自PdfPageEventHelper所以可以直接添加、
 
 ```java
 
