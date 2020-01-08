@@ -9,7 +9,9 @@ date: 2015-05-24 14:56:21
 
 # Links
 
-<a name="lZ1oe"></a>
+[CSDN Blog](http://blog.csdn.net/wwq100?viewmode=contents)
+
+
 ## 好文
 1. [正则表达式学习](https://github.com/ziishaned/learn-regex/blob/master/translations/README-cn.md?utm_source=ZHShareTargetIDMore&utm_medium=social&utm_oi=814426630293454848)
 1. [paulgraham](http://paulgraham.com/articles.html) artic
@@ -20,15 +22,20 @@ date: 2015-05-24 14:56:21
 1. [pdf转图片](https://blog.csdn.net/qq_38571521/article/details/76643331)
 1. [iText页眉页脚实现](https://blog.csdn.net/mmd0308/article/details/74164830)
 
-<a name="iu8jO"></a>
+
 ## 学习资料
 
-<a name="PuDm5"></a>
+
 ### 好书收集
 
 1. [books from github](https://github.com/wangwanqiang/books-1)
 
-<a name="19SBk"></a>
+
+### 概念
+
+1. [卷积](https://www.zhihu.com/question/22298352)
+
+
 ## 工具
 
 1. [plantUML教程](http://plantuml.com/zh/class-diagram)
@@ -37,8 +44,5 @@ date: 2015-05-24 14:56:21
 1. [FTP工具](https://www.wftpserver.com/download.htm#ftprush)
 1. [深度学习](https://playground.tensorflow.org/)
 
-<a name="VXTRw"></a>
-## 概念
 
-1. [卷积](https://www.zhihu.com/question/22298352)
 
