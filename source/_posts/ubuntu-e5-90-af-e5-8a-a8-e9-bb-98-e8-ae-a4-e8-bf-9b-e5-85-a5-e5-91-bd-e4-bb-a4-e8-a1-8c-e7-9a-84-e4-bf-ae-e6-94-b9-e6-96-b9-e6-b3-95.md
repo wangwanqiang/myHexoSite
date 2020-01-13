@@ -5,6 +5,8 @@ categories:
   - linux
 date: 2015-09-02 22:10:16
 tags:
+  - ubuntu
+  - linux
 ---
 
 首先，编辑sudo vi /etc/default/grub 文件，找到如下行:
