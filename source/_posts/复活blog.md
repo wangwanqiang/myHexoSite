@@ -25,4 +25,11 @@ tags:
 
 克隆一个已经存在的网站:)，比如我这个[网站](https://github.com/wangwanqiang/myHexoSite.git)。然后把source目录中的内容删除掉。在调整一下自己的配置就可以了。
 
+# hexo blog 如何创建404页面
+
+有两种方法：
+
+1. 可以自己创建一个 404.html 页面直接放到 source 目录下面。
+
+2. 也可以在 source 目录下面创建一个 404 的文件夹， 然后面在里面创建一个 index.md 的文件。 可以使用这个命令创建 ` hexo new page "404" `
 
