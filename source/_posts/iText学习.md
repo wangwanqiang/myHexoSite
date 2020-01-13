@@ -271,7 +271,7 @@ converterProperties.setTagWorkerFactory(new CustomTagWorkerFactory());<br />Html
 <a name="F5KRY"></a>
 ## 代码的处理方式
 
-![](https://cdn.nlark.com/yuque/0/2019/png/364702/1577187327707-2a0f73e6-6fb4-4f8d-a0f8-1ef5b438d275.png#align=left&display=inline&height=162&originHeight=162&originWidth=569&size=0&status=done&style=none&width=569)
+![](http://depot.wanqiang.wang/blog/20200113/uV2yCxzGTvUH.png?imageslim)
 
 <a name="TTEFI"></a>
 ## pdfHtml的一种处理方式
