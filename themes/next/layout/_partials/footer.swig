@@ -40,6 +40,10 @@
 #}</div>
 {% endif %}
 
+{% if theme.footer.powered and theme.footer.theme.enable %}
+  <span class="post-meta-divider">|</span>
+{% endif %}
+
 <!-- 新增配置开始 -->
 <div class="theme-info">
   <a class="theme-link" target="_blank" href="http://www.beian.miit.gov.cn">
