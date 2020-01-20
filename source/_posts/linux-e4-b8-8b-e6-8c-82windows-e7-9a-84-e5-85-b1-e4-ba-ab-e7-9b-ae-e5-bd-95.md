@@ -5,6 +5,7 @@ categories:
   - linux
 date: 2016-03-02 17:41:12
 tags:
+  - linux
 ---
 
 mount -t cifs -o username=windowsusername //windows machine/sharefiles /mnt/localfolder
