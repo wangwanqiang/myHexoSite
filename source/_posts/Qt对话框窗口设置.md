@@ -26,3 +26,28 @@ setFixedSize(QT_WINDOW_WIDTH_FOR_TOUCH, QT_WINDOW_HEIGHT_FOR_TOUCH);
 QDesktopWidget* desktop = QApplication::desktop();
 setGeometry(desktop->screenGeometry(1));
 ```
+
+# 在非主线程更新显示
+
+```
+QMetaObject::invokeMethod(this, "asyncUpdateGui", Qt::QueuedConnection);
+```
+
+其中 asyncUpdateGui 的定义：
+
+```
+private slots:
+    Q_INVOKABLE void asyncUpdateGui();   
+```
+
+实现：
+
+```
+void xApplicationWindow::asyncUpdateGui()
+{
+    update();
+}
+```
+
+
+
