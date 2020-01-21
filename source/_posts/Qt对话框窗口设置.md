@@ -24,7 +24,10 @@ setFixedSize(QT_WINDOW_WIDTH_FOR_TOUCH, QT_WINDOW_HEIGHT_FOR_TOUCH);
 
 ```
 QDesktopWidget* desktop = QApplication::desktop();
-setGeometry(desktop->screenGeometry(1));
+if (desktop->screenCount() > 1)
+{
+	setGeometry(desktop->screenGeometry(1));
+}
 ```
 
 # 在非主线程更新显示
