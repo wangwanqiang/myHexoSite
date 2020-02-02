@@ -12,6 +12,12 @@ date: 2015-05-24 14:56:21
 
 [CSDN Blog](http://blog.csdn.net/wwq100?viewmode=contents)
 
+## 数据分析
+
+1. [BDP](https://me.bdp.cn/home.html)
+1. [图说](https://tushuo.baidu.com/)
+
+
 
 ## 好文
 1. [正则表达式学习](https://github.com/ziishaned/learn-regex/blob/master/translations/README-cn.md?utm_source=ZHShareTargetIDMore&utm_medium=social&utm_oi=814426630293454848)
