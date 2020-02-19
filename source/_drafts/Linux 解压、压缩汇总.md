@@ -9,6 +9,7 @@ tags:
   - tar
 ---
 
+```
 tar
 -c: 建立压缩档案
 -x：解压
@@ -71,4 +72,4 @@ unzip file.zip //解压zip
 8、*.rar 用 unrar e解压
 9、*.zip 用 unzip 解压
 
-
+```
