@@ -401,7 +401,7 @@ valine:
 # Introduction: https://imsun.net/posts/gitment-introduction/
 # You can get your Github ID from https://api.github.com/users/<Github username>
 gitment:
-  enable: true
+  enable: false
   mint: true # RECOMMEND, A mint on Gitment, to support count, language and proxy_gateway
   count: true # Show comments count in post meta area
   lazy: false # Comments lazy loading with a button
@@ -409,10 +409,9 @@ gitment:
   language: # Force language, or auto switch by theme
   github_user: wangwanqiang # MUST HAVE, Your Github ID
   github_repo: hexoComment # MUST HAVE, The repo you use to store Gitment comments
-  #client_id: ${HexoComment_ClientID} # MUST HAVE, Github client id for the Gitment
-  #client_secret: ${HexoComment_ClientSecret} # EITHER this or proxy_gateway, Github access secret token for the Gitment
-  client_id: 8cf70ec83c0f2297a66a # MUST HAVE, Github client id for the Gitment
-  client_secret: 2c26f406e682f5cd28310d974c98f904a1ced30f # EITHER this or proxy_gateway, Github access secret token for the Gitment
+  client_id: ${HexoComment_ClientID} # MUST HAVE, Github client id for the Gitment
+  client_secret: ${HexoComment_ClientSecret} # EITHER this or proxy_gateway, Github access secret token for the Gitment
+  
   proxy_gateway: # Address of api proxy, See: https://github.com/aimingoo/intersect
   redirect_protocol: # Protocol of redirect_uri with force_redirect_protocol when mint enabled
 
