@@ -23,4 +23,6 @@ tags:
 
 记录用得少、不熟悉的。备忘用：
 
+## links
 
+1. Qt 相关的工具：http://download.qt.io/
