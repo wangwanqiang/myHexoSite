@@ -38,3 +38,5 @@ SPI是串行外设接口(Serial Peripheral Interface)的缩写。是 Motorola �
 1. SDI/MISO – 主设备数据输入，从设备数据输出;
 1. SCLK – 时钟信号，由主设备产生;
 1. CS/SS – 从设备使能信号，由主设备控制。当有多个从设备的时候，因为每个从设备上都有一个片选引脚接入到主设备机中，当我们的主设备和某个从设备通信时将需要将从设备对应的片选引脚电平拉低或者是拉高。
+
+![mark](http://depot.wanqiang.wang/blog/20200503/Q13S5At43CUc.png?imageslim)
