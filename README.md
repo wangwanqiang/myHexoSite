@@ -12,7 +12,7 @@ title: xxxx
 categories:
   - linux
   - MicroGen8
-date: 2016-05-02 15:28:07
+date: 2020-06-02 12:34:25
 tags:
   - linux
   - MicroGen8
