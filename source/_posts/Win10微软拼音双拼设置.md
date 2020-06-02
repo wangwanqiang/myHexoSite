@@ -23,6 +23,8 @@ tags:
 小鹤双拼*2*^*iuvdjhcwfg^xmlnpbksqszxkrltvyovt
 ```
 
+然后在设置中将默认的输入法设置为小鹤双拼。
+
 
 ## 微软拼音支持自定义时间格式
 
