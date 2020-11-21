@@ -34,3 +34,10 @@ QMenu::indicator { /* delete the default icon v */
 }
 
 ```
+
+
+
+效果图：
+
+![image-20201121110545903](QMenu 自定义样式.assets/image-20201121110545903.png)
+
