@@ -10,8 +10,8 @@ date: 2015-05-24 14:56:21
 
 # Links
 
-[CSDN Blog](http://blog.csdn.net/wwq100?viewmode=contents)
-[Qt 下载](https://download.qt.io/)
+1. [CSDN Blog](http://blog.csdn.net/wwq100?viewmode=contents)
+1. [Qt 下载](https://download.qt.io/)
 
 
 
