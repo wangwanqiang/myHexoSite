@@ -32,13 +32,24 @@
 {% endif %}
 
 {% if theme.footer.theme.enable %}
-  <div class="theme-info">{#
+  <div class="powered-by">{#
   #}{{ __('footer.theme') }} &mdash; {#
   #}<a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">{#
     #}NexT.{{ theme.scheme }}{#
   #}</a>{% if theme.footer.theme.version %} v{{ theme.version }}{% endif %}{#
 #}</div>
 {% endif %}
+
+{% if theme.footer.powered and theme.footer.theme.enable %}
+  <span class="post-meta-divider">|</span>
+{% endif %}
+
+<!-- 新增配置开始 -->
+<div class="theme-info">
+  <a class="theme-link" target="_blank" href="http://www.beian.miit.gov.cn">
+    粤ICP备15047376号
+  </a>
+</div>
 
 {% if theme.footer.custom_text %}
   <div class="footer-custom">{#

@@ -2,7 +2,8 @@
 title: tmux使用：复制与粘贴
 id: 252
 categories:
-  - 未分类
+  - tmux
+  - linux
 date: 2017-04-30 08:36:06
 tags:
 ---

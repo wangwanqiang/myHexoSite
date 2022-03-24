@@ -2,7 +2,7 @@
 title: gem 安装 json 报错
 id: 167
 categories:
-  - 未分类
+  - gem
 date: 2016-03-08 21:06:43
 tags:
 ---

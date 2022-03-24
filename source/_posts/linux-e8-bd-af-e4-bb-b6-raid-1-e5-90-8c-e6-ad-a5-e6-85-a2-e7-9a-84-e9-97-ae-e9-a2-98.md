@@ -2,7 +2,7 @@
 title: linux 软件 raid 1 同步慢的问题
 id: 114
 categories:
-  - 未分类
+  - linux
 date: 2015-08-30 13:38:28
 tags:
 ---
