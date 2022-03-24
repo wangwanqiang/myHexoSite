@@ -2,7 +2,7 @@
 title: C++代码之编译器的坑
 id: 239
 categories:
-  - 未分类
+  - c++
 date: 2017-04-22 19:51:12
 tags:
 ---

@@ -2,7 +2,7 @@
 title: IOS 8 的通知调试
 id: 96
 categories:
-  - 未分类
+  - iOS
 date: 2015-06-25 08:11:33
 tags:
 ---

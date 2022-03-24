@@ -2,7 +2,7 @@
 title: gem 设置代理
 id: 154
 categories:
-  - 未分类
+  - gem
 date: 2016-03-04 10:35:39
 tags:
 ---

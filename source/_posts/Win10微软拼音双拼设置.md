@@ -1,11 +1,11 @@
 ---
 title: Win10 微软拼音双拼设置
 categories:
-  - win
+  - win10
   - 输入法
 date: 2020-06-02 12:34:25
 tags:
-  - win
+  - win10
   - 输入法
 ---
 

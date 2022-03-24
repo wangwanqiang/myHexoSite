@@ -2,7 +2,7 @@
 title: 用阿里云解决Jcenter下载太慢的问题。
 id: 222
 categories:
-  - 未分类
+  - iOS
 date: 2017-04-17 22:20:56
 tags:
 ---
