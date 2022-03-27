@@ -39,6 +39,7 @@ jobs:
       
     - name: show hexo version
       run: |
+        npm update
         hexo version
         
     - name: run generate
