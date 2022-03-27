@@ -11,13 +11,6 @@ jobs:
     name: A job to deploy blog.
     steps:
         
-    - uses: actions/setup-node@v2
-      with:
-        node-version: '12'
-    - run: npm install
-    - run: npm test
-    
-    
     - name: Checkout
       uses: actions/checkout@v1
       with:
@@ -36,9 +29,13 @@ jobs:
       #if: steps.cache.outputs.cache-hit != 'true'
       run: npm install -g hexo-cli
       
-    #- name: Install npm
-      #if: steps.cache.outputs.cache-hit != 'true'
-     # run: npm install
+    - name: Install npm nodejs
+      uses: actions/setup-node@v2
+      with:
+        node-version: '12'
+     #-run: npm install
+      
+     #run: npm install
       
     - name: run test
       run: |
