@@ -37,9 +37,10 @@ jobs:
       
      #run: npm install
       
-    - name: run test
+    - name: show hexo version
       run: |
-        echo "$MY_NAME"
+        hexo version
+        
     - name: run generate
       run: |
         hexo clean
@@ -62,4 +63,4 @@ jobs:
     # Use the output from the `deploy` step(use for test action)
     - name: Get the output
       run: |
-        hexo version
+        echo "${{ steps.deploy.outputs.notify }}"
