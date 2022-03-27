@@ -45,6 +45,7 @@ jobs:
       run: |
         ls -al
         cd ./public
+        ls -al
         git init
         git config user.name "github-ci"
         git config user.email "wwq100@gmail.com"
