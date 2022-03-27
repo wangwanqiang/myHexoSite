@@ -32,7 +32,7 @@ jobs:
     - name: Install npm nodejs
       uses: actions/setup-node@v2
       with:
-        node-version: '12'
+        node-version: '14'
      #-run: npm install
       
      #run: npm install
@@ -44,7 +44,7 @@ jobs:
       run: |
         hexo clean
         hexo generate
-        sync
+        
     
     # Deploy hexo blog website.
     - name: Deploy
@@ -62,4 +62,4 @@ jobs:
     # Use the output from the `deploy` step(use for test action)
     - name: Get the output
       run: |
-        echo "${{ steps.deploy.outputs.notify }}"
+        hexo version
