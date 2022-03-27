@@ -24,9 +24,14 @@ jobs:
         key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
         restore-keys: |
           ${{ runner.os }}-node-
-    - name: Install Dependencies
+    - name: Install hexo-cli
       if: steps.cache.outputs.cache-hit != 'true'
-      run: npm ci
+      run: npm install -g hexo-cli
+      
+    - name: Install npm
+      if: steps.cache.outputs.cache-hit != 'true'
+      run: npm install
+      
     
     # Deploy hexo blog website.
     - name: Deploy
