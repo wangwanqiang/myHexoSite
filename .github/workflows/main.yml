@@ -25,11 +25,11 @@ jobs:
         restore-keys: |
           ${{ runner.os }}-node-
     - name: Install hexo-cli
-      if: steps.cache.outputs.cache-hit != 'true'
+      #if: steps.cache.outputs.cache-hit != 'true'
       run: npm install -g hexo-cli
       
     - name: Install npm
-      if: steps.cache.outputs.cache-hit != 'true'
+      #if: steps.cache.outputs.cache-hit != 'true'
       run: npm install
       
     - name: run test
@@ -49,7 +49,7 @@ jobs:
         git config user.name "github-ci"
         git config user.email "wwq100@gmail.com"
         git add .
-        git commit -m "Update docs"
+        git commit -m "Update docs by GitHub"
         git push --force --quiet "https://${{ secrets.DEPLOY_KEY }}@github.com/wangwanqiang/wangwanqiang.github.com" master:master
       
     # Use the output from the `deploy` step(use for test action)
