@@ -39,6 +39,7 @@ jobs:
     # Deploy hexo blog website.
     - name: Deploy
       run: |
+        ls -al
         cd ./public
         git init
         git config user.name "github-ci"
