@@ -38,14 +38,15 @@ jobs:
     
     # Deploy hexo blog website.
     - name: Deploy
-      id: deploy
-      uses: sma11black/hexo-action@v1.0.3
-      with:
-        deploy_key: ${{ secrets.DEPLOY_KEY }}
-        
-        user_name: wangwanqiang  # (or delete this input setting to use bot account)
-        user_email: wwq100@gmial.com  # (or delete this input setting to use bot account)
-        commit_msg: ${{ github.event.head_commit.message }}  # (or delete this input setting to use hexo default settings)
+      run: |
+        cd ./public
+        git init
+        git config user.name "github-ci"
+        git config user.email "wwq100@gmail.com"
+        git add .
+        git commit -m "Update docs"
+        git push --force --quiet "https://${{ secrets.DEPLOY_KEY }}@github.com/wangwanqiang/wangwanqiang.github.com" master:master
+      
     # Use the output from the `deploy` step(use for test action)
     - name: Get the output
       run: |
