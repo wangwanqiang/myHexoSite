@@ -35,6 +35,10 @@ jobs:
     - name: run test
       run: |
         echo "$MY_NAME"
+    - name: run generate
+      run: |
+        hexo clean
+        hexo generate
     
     # Deploy hexo blog website.
     - name: Deploy
