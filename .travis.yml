@@ -23,7 +23,7 @@ after_script:
   - git config user.email "wwq100@gmail.com"
   - git add .
   - git commit -m "Update docs"
-  - git push --force --quiet "https://${GITHUB_REPO_TOKEN}@github.com/wangwanqiang/wangwanqiang.github.com" master:master
+ # - git push --force --quiet "https://${GITHUB_REPO_TOKEN}@github.com/wangwanqiang/wangwanqiang.github.com" master:master
 
 
    
