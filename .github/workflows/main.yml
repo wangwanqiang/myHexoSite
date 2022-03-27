@@ -34,7 +34,7 @@ jobs:
       
     - name: run test
       run: |
-        echo "${{ secrets.MY_NAME }}"
+        echo "$MY_NAME"
     
     # Deploy hexo blog website.
     - name: Deploy
