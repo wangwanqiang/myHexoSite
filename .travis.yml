@@ -23,6 +23,8 @@ after_script:
   - git config user.email "wwq100@gmail.com"
   - git add .
   - git commit -m "Update docs"
+ 
+ # 暂时不用travis发布，需要时只需uncomment下面这行
  # - git push --force --quiet "https://${GITHUB_REPO_TOKEN}@github.com/wangwanqiang/wangwanqiang.github.com" master:master
 
 
