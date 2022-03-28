@@ -2,6 +2,7 @@
 
 [![Build Status](https://travis-ci.org/wangwanqiang/myHexoSite.svg?branch=master)](https://travis-ci.org/wangwanqiang/myHexoSite)
 
+![Github Deploy Status](https://github.com/wangwanqiang/myHexoSite/actions/workflows/main.yml/badge.svg)
 
 
 ## Hexo 文章的文件头
