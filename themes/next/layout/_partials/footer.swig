@@ -52,6 +52,13 @@
   </div>
 {%- endif %}
 
+<!-- 新增配置开始 -->
+<div class="theme-info">
+  <a class="theme-link" target="_blank" href="http://www.beian.miit.gov.cn">
+    粤ICP备15047376号
+  </a>
+</div>
+
 {%- if theme.add_this_id %}
   <div class="addthis_inline_share_toolbox">
     <script src="//s7.addthis.com/js/300/addthis_widget.js#pubid={{ theme.add_this_id }}" async="async"></script>
