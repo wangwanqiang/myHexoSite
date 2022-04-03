@@ -27,7 +27,10 @@ tags:
 
 ## Hexo 升级
 
-1. Next 主题可以直接替换，但里面的配置要重新设置
+1. 更新最新的nodejs
+2. 修改package.json里面的版本号
+3. 更新
+4. Next 主题可以直接替换，但里面的配置要重新设置
 
 
 ## markdown 使用备忘 
@@ -42,7 +45,7 @@ tags:
 |   webssh    | 7681 |
 | tansmission | 9091 |
 |    gitea    | 5080 |
-|             |      |
+
 
 
 
