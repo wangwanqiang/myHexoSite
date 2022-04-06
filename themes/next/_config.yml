@@ -123,7 +123,7 @@ menu:
   categories: /categories/ || th
   archives: /archives/ || archive
   #schedule: /schedule/ || calendar
-  #sitemap: /sitemap.xml || sitemap
+  sitemap: /sitemap.xml || sitemap
   #commonweal: /404/ || heartbeat
 
 # Enable / Disable menu icons / item badges.
@@ -463,8 +463,8 @@ index_with_subtitle: false
 exturl: false
 
 # Google Webmaster tools verification.
-# See: https://www.google.com/webmasters
-google_site_verification:
+# See: https://www.google.com/webmasters  <meta name="google-site-verification" content="0GUyfSKVO6ZMFM5NT-oLy1BeO_LQPEcnGhTn3xTvklI" />
+google_site_verification: 0GUyfSKVO6ZMFM5NT-oLy1BeO_LQPEcnGhTn3xTvklI
 
 # Bing Webmaster tools verification.
 # See: https://www.bing.com/webmaster
