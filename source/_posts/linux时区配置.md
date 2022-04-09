@@ -1,6 +1,9 @@
 ---
 title: linux时区配置
 tags: 
+    - linux
+categories:
+    - linux
 ---
 
 #### 显示当前系统时区
