@@ -41,6 +41,7 @@ jobs:
       run: |
         npm update
         hexo version
+        npm audit fix
         
     - name: run generate
       run: |
