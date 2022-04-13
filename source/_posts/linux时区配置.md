@@ -1,5 +1,6 @@
 ---
 title: linux时区配置
+date: 2022-04-10 12:10:16
 tags: 
     - linux
 categories:
