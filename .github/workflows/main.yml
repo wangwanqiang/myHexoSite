@@ -41,6 +41,7 @@ jobs:
       run: |
         npm update
         hexo version
+        npm outdated
         npm fund
         
     - name: run generate
