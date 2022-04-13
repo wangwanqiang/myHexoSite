@@ -41,7 +41,7 @@ jobs:
       run: |
         npm update
         hexo version
-        npm audit
+        npm fund
         
     - name: run generate
       run: |
