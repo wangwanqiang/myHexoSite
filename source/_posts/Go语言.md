@@ -22,6 +22,32 @@ new 的参数要求传入一个类型，而不是一个值，它会申请该类�
 
 make 也用于内存分配，但它只用于引用对象 slice、map、channel的内存创建，返回的类型是类型本身。
 
+## 基础语语法
+
+1. 当标识符（包括常量、变量、类型、函数名、结构字段等等）以一个大写字母开头，如：Group1，那么使用这种形式的标识符的对象就可以被外部包的代码所使用（客户端程序需要先导入这个包），这被称为导出（像面向对象语言中的 public）；标识符如果以小写字母开头，则对包外是不可见的，但是他们在整个包的内部是可见并且可用的（像面向对象语言中的 protected ）。
+2. 第一行代码 package main 定义包名。你必须在源文件中非注释的第一行指明这个文件属于哪个包，如：package main。package main表示一个可独立执行的程序，每个 Go 应用程序都包含一个名为 main 的包。
+
+3. Go 语言的字符串可以通过 + 实现
+4. 常量定义：const identifier [type] = value
+
+```
+package main
+
+import "fmt"
+
+func main() {
+   const LENGTH int = 10
+   const WIDTH int = 5  
+   var area int
+   const a, b, c = 1, false, "str" //多重赋值
+
+   area = LENGTH * WIDTH
+   fmt.Printf("面积为 : %d", area)
+   println()
+   println(a, b, c)  
+}
+```
+
 ## 接口
 
 
