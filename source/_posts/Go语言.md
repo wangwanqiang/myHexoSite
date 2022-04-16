@@ -1,5 +1,5 @@
 ---
-title: Go语言
+title: Go语言笔记
 categories:
   - Go
   - 开发
@@ -9,6 +9,8 @@ tags:
 ---
 
 # Go语言笔记
+
+参考：https://www.runoob.com/go/go-tutorial.html
 
 ## 数据类型
 
@@ -47,6 +49,9 @@ func main() {
    println(a, b, c)  
 }
 ```
+5. iota，特殊常量，可以认为是一个可以被编译器修改的常量。iota 在 const关键字出现时将被重置为 0(const 内部的第一行之前)，const 中每新增一行常量声明将使 iota 计数一次(iota 可理解为 const 语句块中的行索引)。
+6. 	select 是 Go 中的一个控制结构，类似于用于通信的 switch 语句。每个 case 必须是一个通信操作，要么是发送要么是接收。
+7. go 语言函数可以返回多个值。
 
 ## 接口
 
