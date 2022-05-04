@@ -17,8 +17,8 @@ url: https://wanqiang.wang
 root: /
 # permalink: :year/:month/:day/:title/
 # permalink_defaults:
-permalink: post/:abbrlink/
-# 结尾的"/"如果去掉，在我本地点开文章时会有问题，所以加了"/"
+# 更改 permalink 值
+permalink: post/:abbrlink.html
 # 还可以使用类似 post/:abbrlink.html 这种链接
 
 abbrlink:
