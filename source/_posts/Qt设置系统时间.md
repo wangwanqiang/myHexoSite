@@ -1,5 +1,5 @@
 ---
-title: Qt设置系统时间
+title: Qt璁剧疆绯荤粺鏃堕棿
 categories:
   - Qt
 tags:
@@ -8,7 +8,7 @@ tags:
 
 ```
 QString date = "date -s \"2007-08-03 14:15:00\"" 
-?QProcess::startDetached(date);
-?QProcess::startDetached("hwclock -w"); // 同步系统时间
-?QProcess::startDetached("sync"); // 保存配置
+QProcess::startDetached(date);
+QProcess::startDetached("hwclock -w"); // 鍚屾绯荤粺鏃堕棿
+QProcess::startDetached("sync"); // 淇濆瓨閰嶇疆
 ```
