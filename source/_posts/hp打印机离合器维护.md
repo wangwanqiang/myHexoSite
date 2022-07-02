@@ -1,6 +1,9 @@
 ---
 title: hp打印机离合器维修
-tags: 办公
+categories:
+  - 外设
+tags:
+  - printer
 ---
 
 #### 故障现象
