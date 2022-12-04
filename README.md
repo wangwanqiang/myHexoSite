@@ -45,6 +45,7 @@ tags:
 |   webssh    | 7681 |
 | tansmission | 9091 |
 |    gitea    | 5080 |
+|    备用    | 5000~5100 |
 
 
 
