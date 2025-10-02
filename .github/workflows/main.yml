@@ -74,7 +74,13 @@ jobs:
         git init
         git add -A
         git commit -m "Update docs by GitHub Actions"
+        # 添加远程仓库
+        git remote add origin git@github.com:wangwanqiang/wangwanqiang.github.com.git
+        # 显示远程仓库配置
+        git remote -v
         # 配置Git使用SSH密钥
-        git config --global core.sshCommand "ssh -i ~/.ssh/id_rsa -o StrictHostKeyChecking=no"
-        # 使用SSH URL进行部署，利用已配置的Deploy keys
-        GIT_SSH_COMMAND="ssh -v" git push --force git@github.com:wangwanqiang/wangwanqiang.github.com.git master
+        git config --global core.sshCommand "ssh -i ~/.ssh/id_rsa -o StrictHostKeyChecking=no -v"
+        # 显示Git配置
+        git config --list
+        # 使用详细模式推送
+        GIT_SSH_COMMAND="ssh -v" git push --force origin master
