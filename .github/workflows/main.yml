@@ -54,7 +54,7 @@ jobs:
     - name: Deploy
       uses: peaceiris/actions-gh-pages@v3
       with:
-        deploy_key: ${{ secrets.ACTIONS_DEPLOY_KEY }}
+        github_token: ${{ secrets.GITHUB_TOKEN }}
         external_repository: wangwanqiang/wangwanqiang.github.com
         publish_branch: master
         publish_dir: ./public
