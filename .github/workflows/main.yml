@@ -55,7 +55,8 @@ jobs:
       run: |
         git config --global user.name "github-actions[bot]"
         git config --global user.email "github-actions[bot]@users.noreply.github.com"
-        npm install hexo-deployer-git --save
-        hexo deploy
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        cd ./public
+        git init
+        git add -A
+        git commit -m "Update docs by GitHub Actions"
+        git push --force https://${{ secrets.GITHUB_TOKEN }}@github.com/wangwanqiang/wangwanqiang.github.com.git master
