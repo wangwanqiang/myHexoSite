@@ -75,7 +75,7 @@ jobs:
         git add -A
         git commit -m "Update docs by GitHub Actions"
         # 添加远程仓库
-        git remote add origin git@github.com:myHexoSite/wangwanqiang.github.com.git
+        git remote add origin git@github.com:wangwanqiang/wangwanqiang.github.com.git
         # 显示远程仓库配置
         git remote -v
         # 配置Git使用SSH密钥
