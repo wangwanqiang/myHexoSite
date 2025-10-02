@@ -82,5 +82,11 @@ jobs:
         git config --global core.sshCommand "ssh -i ~/.ssh/id_rsa -o StrictHostKeyChecking=no -v"
         # 显示Git配置
         git config --list
+        # 测试SSH连接和仓库访问权限
+        ssh -vT git@github.com "echo 'SSH connection successful'" || true
+        # 尝试列出远程仓库引用（这是一个只读操作，测试权限）
+        git ls-remote origin || true
+        # 再次确认SSH命令配置
+        echo "GIT_SSH_COMMAND: ssh -i ~/.ssh/id_rsa -v"
         # 使用详细模式推送
-        GIT_SSH_COMMAND="ssh -v" git push --force origin master
+        GIT_SSH_COMMAND="ssh -i ~/.ssh/id_rsa -v" git push --force origin master
