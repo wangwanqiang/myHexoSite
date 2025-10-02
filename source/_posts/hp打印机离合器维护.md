@@ -1,10 +1,12 @@
 ---
 title: hp打印机离合器维修
+date: 2022-07-04 19:57:13
 categories:
   - 外设
 tags:
   - printer
 ---
+
 
 #### 故障现象
 1. 总是卡纸
