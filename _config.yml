@@ -95,5 +95,6 @@ theme: next
 ## Docs: https://hexo.io/docs/deployment.html
 deploy:
   type: git
-  repo: https://github.com/wangwanqiang/wangwanqiang.github.com.git
+  repo: https://${GITHUB_TOKEN}@github.com/wangwanqiang/wangwanqiang.github.com.git
   branch: master
+  message: "Update docs by GitHub Actions"
