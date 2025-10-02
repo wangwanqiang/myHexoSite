@@ -49,8 +49,18 @@ jobs:
         hexo clean
         hexo generate
         
-    
-    # Deploy hexo blog website.
+    # 配置SSH以使用Deploy keys
+    - name: Configure SSH
+      run: |
+        mkdir -p ~/.ssh
+        # 从Repository secrets获取DEPLOY_KEY并配置为SSH密钥
+        echo "${{ secrets.DEPLOY_KEY }}" > ~/.ssh/id_rsa
+        chmod 600 ~/.ssh/id_rsa
+        # 配置known_hosts避免主机验证问题
+        ssh-keyscan github.com >> ~/.ssh/known_hosts
+        chmod 644 ~/.ssh/known_hosts
+        
+    # Deploy hexo blog website using Deploy keys
     - name: Deploy
       run: |
         git config --global user.name "github-actions[bot]"
@@ -59,4 +69,5 @@ jobs:
         git init
         git add -A
         git commit -m "Update docs by GitHub Actions"
-        git push --force https://${{ secrets.GITHUB_TOKEN }}@github.com/wangwanqiang/wangwanqiang.github.com.git master
+        # 使用SSH URL进行部署，利用已配置的Deploy keys
+        git push --force git@github.com:wangwanqiang/wangwanqiang.github.com.git master
