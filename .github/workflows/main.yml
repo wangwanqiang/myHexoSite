@@ -59,6 +59,11 @@ jobs:
         # 配置known_hosts避免主机验证问题
         ssh-keyscan github.com >> ~/.ssh/known_hosts
         chmod 644 ~/.ssh/known_hosts
+        # 调试信息：检查密钥文件权限和内容长度
+        ls -la ~/.ssh
+        echo "Key length: $(cat ~/.ssh/id_rsa | wc -c) characters"
+        # 调试SSH连接
+        ssh -vT git@github.com || true
         
     # Deploy hexo blog website using Deploy keys
     - name: Deploy
@@ -69,5 +74,7 @@ jobs:
         git init
         git add -A
         git commit -m "Update docs by GitHub Actions"
+        # 配置Git使用SSH密钥
+        git config --global core.sshCommand "ssh -i ~/.ssh/id_rsa -o StrictHostKeyChecking=no"
         # 使用SSH URL进行部署，利用已配置的Deploy keys
-        git push --force git@github.com:wangwanqiang/wangwanqiang.github.com.git master
+        GIT_SSH_COMMAND="ssh -v" git push --force git@github.com:wangwanqiang/wangwanqiang.github.com.git master
