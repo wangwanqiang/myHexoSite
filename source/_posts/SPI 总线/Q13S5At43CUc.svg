@@ -1,0 +1,71 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="600" height="400" viewBox="0 0 600 400">
+  <!-- 背景和标题 -->
+  <rect width="600" height="400" fill="white"/>
+  <text x="300" y="30" font-family="Arial" font-size="24" text-anchor="middle" font-weight="bold">SPI总线硬件连接示意图</text>
+  
+  <!-- 主设备 -->
+  <rect x="50" y="100" width="150" height="150" rx="10" ry="10" fill="#e6f3ff" stroke="#3366cc" stroke-width="2"/>
+  <text x="125" y="130" font-family="Arial" font-size="20" text-anchor="middle" font-weight="bold">Master</text>
+  
+  <!-- 从设备1 -->
+  <rect x="250" y="100" width="150" height="150" rx="10" ry="10" fill="#fff2e6" stroke="#cc6633" stroke-width="2"/>
+  <text x="325" y="130" font-family="Arial" font-size="20" text-anchor="middle" font-weight="bold">Slave 1</text>
+  
+  <!-- 从设备2 -->
+  <rect x="450" y="100" width="100" height="150" rx="10" ry="10" fill="#fff2e6" stroke="#cc6633" stroke-width="2"/>
+  <text x="500" y="130" font-family="Arial" font-size="20" text-anchor="middle" font-weight="bold">Slave 2</text>
+  
+  <!-- 信号线 -->
+  
+  <!-- MOSI -->
+  <line x1="200" y1="150" x2="250" y2="150" stroke="#009900" stroke-width="3"/>
+  <line x1="400" y1="150" x2="450" y2="150" stroke="#009900" stroke-width="3"/>
+  <text x="225" y="145" font-family="Arial" font-size="14" text-anchor="middle" fill="#006600">MOSI</text>
+  
+  <!-- MISO -->
+  <line x1="250" y1="170" x2="200" y2="170" stroke="#cc0000" stroke-width="3"/>
+  <line x1="450" y1="170" x2="480" y2="170" stroke="#cc0000" stroke-width="3"/>
+  <line x1="480" y1="170" x2="480" y2="180" stroke="#cc0000" stroke-width="3"/>
+  <line x1="480" y1="180" x2="200" y2="180" stroke="#cc0000" stroke-width="3"/>
+  <text x="225" y="165" font-family="Arial" font-size="14" text-anchor="middle" fill="#990000">MISO</text>
+  
+  <!-- SCLK -->
+  <line x1="200" y1="190" x2="250" y2="190" stroke="#6666cc" stroke-width="3"/>
+  <line x1="400" y1="190" x2="450" y2="190" stroke="#6666cc" stroke-width="3"/>
+  <text x="225" y="185" font-family="Arial" font-size="14" text-anchor="middle" fill="#333399">SCLK</text>
+  
+  <!-- CS1 -->
+  <line x1="200" y1="130" x2="200" y2="120" stroke="#cc66cc" stroke-width="3"/>
+  <line x1="200" y1="120" x2="325" y2="120" stroke="#cc66cc" stroke-width="3"/>
+  <line x1="325" y1="120" x2="325" y2="130" stroke="#cc66cc" stroke-width="3"/>
+  <text x="262.5" y="115" font-family="Arial" font-size="14" text-anchor="middle" fill="#993399">CS1</text>
+  
+  <!-- CS2 -->
+  <line x1="200" y1="110" x2="200" y2="100" stroke="#ff6600" stroke-width="3"/>
+  <line x1="200" y1="100" x2="500" y2="100" stroke="#ff6600" stroke-width="3"/>
+  <line x1="500" y1="100" x2="500" y2="130" stroke="#ff6600" stroke-width="3"/>
+  <text x="350" y="95" font-family="Arial" font-size="14" text-anchor="middle" fill="#cc3300">CS2</text>
+  
+  <!-- 信号标签 -->
+  <text x="100" y="155" font-family="Arial" font-size="14" text-anchor="end">MOSI</text>
+  <text x="100" y="175" font-family="Arial" font-size="14" text-anchor="end">MISO</text>
+  <text x="100" y="195" font-family="Arial" font-size="14" text-anchor="end">SCLK</text>
+  <text x="100" y="135" font-family="Arial" font-size="14" text-anchor="end">CS1</text>
+  <text x="100" y="115" font-family="Arial" font-size="14" text-anchor="end">CS2</text>
+  
+  <!-- 图例 -->
+  <rect x="50" y="300" width="20" height="10" fill="#009900"/>
+  <text x="80" y="308" font-family="Arial" font-size="12">MOSI (Master Out Slave In)</text>
+  
+  <rect x="50" y="320" width="20" height="10" fill="#cc0000"/>
+  <text x="80" y="328" font-family="Arial" font-size="12">MISO (Master In Slave Out)</text>
+  
+  <rect x="50" y="340" width="20" height="10" fill="#6666cc"/>
+  <text x="80" y="348" font-family="Arial" font-size="12">SCLK (Serial Clock)</text>
+  
+  <rect x="300" y="300" width="20" height="10" fill="#cc66cc"/>
+  <text x="330" y="308" font-family="Arial" font-size="12">CS1 (Chip Select 1)</text>
+  
+  <rect x="300" y="320" width="20" height="10" fill="#ff6600"/>
+  <text x="330" y="328" font-family="Arial" font-size="12">CS2 (Chip Select 2)</text>
+</svg>

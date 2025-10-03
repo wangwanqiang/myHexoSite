@@ -10,6 +10,8 @@ abbrlink: e5b
 date: 2020-05-03 08:10:33
 ---
 
+<!-- 注意：本文中的图片已转换为本地引用，请确保将图片文件下载到 source/_posts/SPI 总线/ 目录下 -->
+
 # SPI总线技术详解
 
 ## 1. 概述
@@ -51,7 +53,7 @@ SPI总线通常需要4根信号线，在单向传输的情况下也可以使用3
 - **SCLK（Serial Clock）**：串行时钟信号，由主设备产生并控制
 - **CS/SS（Chip Select/Slave Select）**：片选信号，由主设备控制，用于选择要通信的从设备
 
-![SPI总线硬件连接示意图](http://depot.wanqiang.wang/blog/20200503/Q13S5At43CUc.png?imageslim)
+![SPI总线硬件连接示意图](Q13S5At43CUc.svg)
 
 当系统中有多个SPI从设备时，主设备需要为每个从设备提供独立的片选信号。通信时，主设备通过拉低特定从设备的片选信号来选中该设备，未被选中的设备则忽略总线上的通信。
 
@@ -90,8 +92,8 @@ SPI数据传输过程如下：
 
 SPI通信以字节（8位）或更大的数据帧为单位进行传输，数据通常以MSB（最高有效位）优先的方式发送，但也有一些设备支持LSB（最低有效位）优先的方式。
 
-![SPI通信时序图](http://depot.wanqiang.wang/blog/20200503/DrlkwQgyKQ6W.png?imageslim)
-![SPI不同模式时序对比](http://depot.wanqiang.wang/blog/20200503/aJgCAIwhwlHC.png?imageslim)
+![SPI通信时序图](DrlkwQgyKQ6W.svg)
+![SPI不同模式时序对比](aJgCAIwhwlHC.svg)
 
 ### 4.3 多字节传输与流控制
 
