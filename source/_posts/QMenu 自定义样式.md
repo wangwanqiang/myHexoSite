@@ -40,5 +40,5 @@ QMenu::indicator { /* delete the default icon v */
 
 效果图：
 
-![image-20201121110545903](QMenu 自定义样式/image-20201121110545903.png)
+![image-20201121110545903](image-20201121110545903.png)
 
