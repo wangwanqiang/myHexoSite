@@ -3,10 +3,11 @@ title: ubuntu 启动默认进入命令行的修改方法
 id: 116
 categories:
   - linux
-date: 2015-09-02 22:10:16
 tags:
   - ubuntu
   - linux
+abbrlink: e88e
+date: 2015-09-02 22:10:16
 ---
 
 首先，编辑sudo vi /etc/default/grub 文件，找到如下行:

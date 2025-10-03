@@ -3,9 +3,10 @@ title: Linux 下挂Windows的共享目录
 id: 148
 categories:
   - linux
-date: 2016-03-02 17:41:12
 tags:
   - linux
+abbrlink: ee8a
+date: 2016-03-02 17:41:12
 ---
 
 mount -t cifs -o username=windowsusername //windows machine/sharefiles /mnt/localfolder

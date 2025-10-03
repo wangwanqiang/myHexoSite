@@ -3,10 +3,11 @@ title: 解决 package 'fontconfig' not found
 categories:
   - linux
   - compile
-date: 2020-01-20 17:32:18
 tags:
   - linux
   - compile
+abbrlink: 8e2e
+date: 2020-01-20 17:32:18
 ---
 
 # 解决 package 'fontconfig' not found

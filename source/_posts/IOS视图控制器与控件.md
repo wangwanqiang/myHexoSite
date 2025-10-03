@@ -2,8 +2,9 @@
 title: 读书笔记：IOS视图控制器与控件
 url: 36.html
 id: 36
-date: 2015-05-19 05:55:16
 tags: IOS
+abbrlink: aea9
+date: 2015-05-19 05:55:16
 ---
 
 # IOS 视图控制器 

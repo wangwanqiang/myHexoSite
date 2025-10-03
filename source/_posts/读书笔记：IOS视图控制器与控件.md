@@ -3,6 +3,7 @@ title: 读书笔记：IOS视图控制器与控件
 id: 36
 categories:
   - iOS
+abbrlink: aea9
 date: 2015-05-19 05:55:16
 tags:
 ---

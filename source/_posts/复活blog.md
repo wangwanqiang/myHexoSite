@@ -1,10 +1,11 @@
 ---
 title: blog复活
-date: 2020-01-04 16:14:16
 tags:
-    - hexo
-    - next
-    - blog
+  - hexo
+  - next
+  - blog
+abbrlink: dc95
+date: 2020-01-04 16:14:16
 ---
 
 # 回顾

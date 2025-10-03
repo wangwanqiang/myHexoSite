@@ -1,10 +1,11 @@
 ---
 title: linux时区配置
-date: 2022-04-10 12:10:16
-tags: 
-    - linux
+tags:
+  - linux
 categories:
-    - linux
+  - linux
+abbrlink: f0e6
+date: 2022-04-10 12:10:16
 ---
 
 #### 显示当前系统时区

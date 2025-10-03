@@ -3,9 +3,10 @@ title: 如何自己编译Logsaw
 id: 233
 categories:
   - 日志系统
-date: 2017-04-22 09:59:26
 tags:
   - log
+abbrlink: a903
+date: 2017-04-22 09:59:26
 ---
 
 Logsaw是一个非常不错的日志分析工具，自已编译一定要严格按照它的编译教程来做。自己花了一些时间，对eclipse不熟悉。

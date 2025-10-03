@@ -3,6 +3,7 @@ title: Linux Lab
 url: 350.html
 id: 350
 comments: false
+abbrlink: '46e4'
 date: 2019-06-14 09:03:54
 tags:
 ---

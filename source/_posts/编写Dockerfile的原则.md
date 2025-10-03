@@ -3,6 +3,7 @@ title: 编写Dockerfile的原则
 id: 249
 categories:
   - docker
+abbrlink: e1f9
 date: 2017-04-29 09:48:19
 tags:
 ---

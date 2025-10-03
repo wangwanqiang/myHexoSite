@@ -1,10 +1,11 @@
 ---
 title: Qt设置系统时间
-date: 2022-06-13 19:47:48
 categories:
   - Qt
 tags:
   - Qt
+abbrlink: f0e6
+date: 2022-06-13 19:47:48
 ---
 
 ```

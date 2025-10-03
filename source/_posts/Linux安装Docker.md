@@ -4,6 +4,7 @@ id: 111
 categories:
   - docker
   - linux
+abbrlink: ebb4
 date: 2015-08-01 18:50:29
 tags:
 ---

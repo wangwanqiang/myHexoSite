@@ -3,8 +3,9 @@ title: UML学习之听课
 id: 53
 categories:
   - 百度空间的旧文章
-date: 2015-05-19 06:54:41
 tags: uml
+abbrlink: 1c1c
+date: 2015-05-19 06:54:41
 ---
 
 <div class="pcs-article-box_ptkaiapt4bxy_baiduscarticle">

@@ -3,6 +3,7 @@ title: gem 安装 json 报错
 id: 167
 categories:
   - gem
+abbrlink: '7056'
 date: 2016-03-08 21:06:43
 tags:
 ---

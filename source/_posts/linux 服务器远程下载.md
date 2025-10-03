@@ -3,6 +3,7 @@ title: linux 服务器远程下载
 id: 109
 categories:
   - linux
+abbrlink: ac9b
 date: 2015-08-01 18:46:00
 tags:
 ---

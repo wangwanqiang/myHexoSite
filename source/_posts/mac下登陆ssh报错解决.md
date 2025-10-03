@@ -3,6 +3,7 @@ title: mac下登陆ssh报错解决
 id: 159
 categories:
   - Mac 使用
+abbrlink: e48
 date: 2016-03-06 09:05:00
 tags:
 ---

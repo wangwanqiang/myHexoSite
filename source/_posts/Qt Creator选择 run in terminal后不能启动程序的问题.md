@@ -3,6 +3,7 @@ title: Qt Creator选择 run in terminal后不能启动程序的问题
 id: 194
 categories:
   - linux
+abbrlink: 604c
 date: 2016-06-16 13:48:59
 tags:
 ---

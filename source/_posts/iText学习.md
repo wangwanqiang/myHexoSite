@@ -2,10 +2,11 @@
 title: iText学习
 categories:
   - iText
-date: 2020-01-05 23:21:01
 tags:
   - iText
   - 排版
+abbrlink: 649d
+date: 2020-01-05 23:21:01
 ---
 
 

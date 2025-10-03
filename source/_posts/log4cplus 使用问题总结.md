@@ -1,7 +1,9 @@
+---
 title: log4cplus 使用问题总结
 id: 197
 categories:
   - 未分类
+abbrlink: 217f
 date: 2016-08-16 08:58:21
 tags:
 ---

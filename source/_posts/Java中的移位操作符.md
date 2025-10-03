@@ -2,6 +2,7 @@
 title: Java中的移位操作符
 url: 278.html
 id: 278
+abbrlink: '3537'
 date: 2018-04-29 11:09:22
 tags:
 ---

@@ -5,6 +5,7 @@ tags:
 id: 119
 categories:
   - docker
+abbrlink: 3c14
 date: 2016-02-28 09:01:19
 ---
 

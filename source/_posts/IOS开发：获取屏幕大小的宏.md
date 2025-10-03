@@ -3,6 +3,7 @@ title: IOS开发：获取屏幕大小的宏
 id: 121
 categories:
   - IOS 开发
+abbrlink: b1ab
 date: 2016-03-01 20:50:23
 tags:
 ---

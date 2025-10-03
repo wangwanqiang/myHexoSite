@@ -2,9 +2,10 @@
 title: 理查德・希普（Richard Hipp）：SQLite 之父与轻量化技术革命的引领者
 categories:
   - SQLite
-date: 2025-10-02 23:11:00
 tags:
   - SQLite
+abbrlink: 9c76
+date: 2025-10-02 23:11:00
 ---
 
 # 理查德・希普（Richard Hipp）：SQLite 之父与轻量化技术革命的引领者

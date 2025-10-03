@@ -1,7 +1,9 @@
+---
 title: ssh 通过证书建立信任关系（转）（备用）
 id: 264
 categories:
   - 未分类
+abbrlink: 26b1
 date: 2017-10-17 14:35:06
 tags:
 ---

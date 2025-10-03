@@ -1,8 +1,10 @@
+---
 title: PHP利用PHPExcel操作Excel文件
 id: 229
 categories:
   - PHP
   - 好文收藏
+abbrlink: '7640'
 date: 2017-04-20 08:53:13
 tags:
 ---

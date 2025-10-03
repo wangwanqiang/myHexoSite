@@ -3,9 +3,10 @@ title: Qt对话框窗口设置
 categories:
   - qt
   - c++
-date: 2020-01-21 09:28:41
 tags:
   - qt
+abbrlink: 2de4
+date: 2020-01-21 09:28:41
 ---
 
 # 设置窗口标题

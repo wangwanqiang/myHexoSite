@@ -4,6 +4,7 @@ id: 187
 categories:
   - linux
   - MicroGen8
+abbrlink: 7d41
 date: 2016-05-02 10:47:07
 tags:
 ---

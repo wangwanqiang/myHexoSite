@@ -3,9 +3,10 @@ title: Go语言笔记
 categories:
   - Go
   - 开发
-date: 2022-03-23 20:15:25
 tags:
   - Go
+abbrlink: aa66
+date: 2022-03-23 20:15:25
 ---
 
 # Go语言笔记

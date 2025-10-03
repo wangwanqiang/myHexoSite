@@ -3,6 +3,7 @@ title: win10 打不开samba文件夹的解决方法
 id: 202
 categories:
   - win10
+abbrlink: 4a9e
 date: 2016-10-02 09:37:30
 tags:
 ---

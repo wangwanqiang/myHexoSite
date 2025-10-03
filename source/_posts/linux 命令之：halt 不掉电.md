@@ -3,6 +3,7 @@ title: linux 命令之：halt 不掉电
 id: 106
 categories:
   - linux
+abbrlink: 2ee1
 date: 2015-07-28 20:12:14
 tags:
 ---

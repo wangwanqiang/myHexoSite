@@ -1,6 +1,7 @@
 ---
 title: Thinkpad 小红点恢复Win10中键滚动功能
 author: Wanqiang
+abbrlink: 3fe7
 date: 2020-01-04 07:26:22
 tags:
 ---

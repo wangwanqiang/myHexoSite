@@ -1,5 +1,7 @@
+---
 title: IOS设置固定大小的图片
 author: Wanqiang
+abbrlink: 5fbb
 date: 2018-02-17 11:50:54
 tags:
 ---

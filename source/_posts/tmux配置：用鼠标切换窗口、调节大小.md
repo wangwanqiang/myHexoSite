@@ -1,7 +1,9 @@
+---
 title: tmux配置：用鼠标切换窗口、调节大小
 id: 246
 categories:
   - linux
+abbrlink: 198e
 date: 2017-04-28 09:16:30
 tags:
 ---

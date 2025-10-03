@@ -4,6 +4,7 @@ id: 91
 categories:
   - docker
   - 树莓派
+abbrlink: baf1
 date: 2015-05-27 07:06:26
 tags:
 ---

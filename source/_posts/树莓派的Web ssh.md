@@ -3,6 +3,7 @@ title: 树莓派的Web ssh
 url: 345.html
 id: 345
 comments: false
+abbrlink: '8033'
 date: 2019-06-03 15:26:13
 tags:
 ---

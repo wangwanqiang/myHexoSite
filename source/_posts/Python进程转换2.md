@@ -1,7 +1,9 @@
+---
 title: python进制转换
 id: 45
 categories:
   - 未分类
+abbrlink: 915b
 date: 2015-05-19 06:31:57
 tags:
 ---

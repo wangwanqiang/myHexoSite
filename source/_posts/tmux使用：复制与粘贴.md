@@ -4,6 +4,7 @@ id: 252
 categories:
   - tmux
   - linux
+abbrlink: f8e
 date: 2017-04-30 08:36:06
 tags:
 ---

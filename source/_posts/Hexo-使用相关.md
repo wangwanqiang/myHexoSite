@@ -1,9 +1,11 @@
+---
 title: Hexo 使用相关
 author: Wanqiang
 tags:
   - blog
 categories:
   - tools
+abbrlink: e0b6
 date: 2017-11-04 19:36:00
 ---
 # 安装与配置

@@ -3,6 +3,7 @@ title: gem 设置代理
 id: 154
 categories:
   - gem
+abbrlink: '2809'
 date: 2016-03-04 10:35:39
 tags:
 ---

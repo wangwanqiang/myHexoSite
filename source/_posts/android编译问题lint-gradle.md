@@ -2,9 +2,10 @@
 title: 'Android 编译问题：Could not find com.android.tools.lint:lint-gradle:26.1.2.'
 url: 284.html
 id: 284
-date: 2018-04-30 10:35:31
 tags:
   - android
+abbrlink: 53b3
+date: 2018-04-30 10:35:31
 ---
 
 编译时报如下的错误：

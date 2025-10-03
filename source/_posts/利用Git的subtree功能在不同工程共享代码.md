@@ -3,9 +3,10 @@ title: 'Git: 利用Git的subtree功能在不同工程共享代码'
 id: 156
 categories:
   - git
-date: 2016-03-05 10:26:27
 tags:
   - git
+abbrlink: 278d
+date: 2016-03-05 10:26:27
 ---
 
 ## 1\. 第一次添加子目录，建立与git项目的关联
