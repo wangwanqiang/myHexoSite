@@ -67,6 +67,7 @@ index_generator:
   path: ''
   per_page: 10
   order_by: -date
+  layout: ['archive', 'index']
   
 # Category & Tag
 default_category: uncategorized
