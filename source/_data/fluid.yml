@@ -1,0 +1,78 @@
+# Fluid 主题配置文件
+# 更多配置请参考官方文档：https://hexo.fluid-dev.com/docs/
+
+# 导航菜单
+navbar:
+  menu:
+    首页: /
+    归档: /archives/
+    分类: /categories/
+    标签: /tags/
+    关于: /about/
+  # 移动端菜单图标
+  mobile_icon_menu: true
+
+# 侧边栏
+sidebar:
+  # 侧边栏位置
+  position: left
+  # 显示时机
+  display: post
+  # 社交链接
+  social:
+    GitHub: https://github.com
+    微博: https://weibo.com
+  # 页脚信息
+  footer: 
+    content: 'Powered by <a href="https://hexo.io" target="_blank">Hexo</a> & <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank">Fluid</a>'
+
+# 代码高亮
+highlight:
+  # 代码块主题
+  theme: atom-one-dark
+  # 行号显示
+  line_number: true
+  # 代码复制功能
+  clipboard: true
+
+# 文章设置
+post:
+  # 文章标题下方信息
+  meta:
+    author: true
+    date: true
+    category: true
+    tag: true
+    toc: true
+  # 文章结尾
+  related_posts:
+    enable: true
+    limit: 6
+  # 文章版权信息
+  copyright:
+    enable: true
+    content: '本文采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议，转载请注明出处。'
+
+# 评论系统（默认禁用，如需使用请参考文档配置）
+comment:
+  enable: false
+  # 可选择：utterances, disqus, gitalk, livere, valine等
+  type:
+
+# 搜索功能
+search:
+  enable: true
+  # 可选择：hexo, algolia
+  type: hexo
+
+# 页面顶部进度条
+progressbar:
+  enable: true
+
+# 暗黑模式
+dark_mode:
+  enable: true
+  # 切换按钮位置
+  toggle: true
+  # 自动模式（根据系统设置）
+  auto: true
