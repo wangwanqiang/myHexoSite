@@ -6,24 +6,24 @@ categories:
 tags:
   - keil
 abbrlink: e241
-date: 2015-05-19 06:58:18
+date: 2009-09-27 06:58:18
 ---
 
-<div class="pcs-article-box_ptkaiapt4bxy_baiduscarticle">
 
-# [头文件及keil C的一点经验](http://hi.baidu.com/fc/editor/fckeditor.html?InstanceName=spBlogText&amp;v=3.1&amp;Toolbar=Default&amp;v=3.1.html#)·
 
-<div class="pcs-article-c_ptkaiapt4bxy_baiduscarticle">
-<div class="pcs-article-content_ptkaiapt4bxy_baiduscarticle"></div>
-<div class="pcs-article-content_ptkaiapt4bxy_baiduscarticle">许多初学者使用网上下载的程序时都会遇到这样一个问题，就是头文件找不到。我想就这个问题说明一下。/
+# 头文件及keil C的一点经验
+
+
+许多初学者使用网上下载的程序时都会遇到这样一个问题，就是头文件找不到。我想就这个问题说明一下。
   
-·首先，我们用到的KEIL有几种版本的，头文件也不同。有reg51.h和at89x51.h两种比较常见。at89x51和reg51这两个文件有点不同，reg51没有对IO口的位地址进行定义。所以我们在使用reg51的时候，可能会有一些相关语句通不过，比方说P0_1=1;这样的位操作。
+* 首先，我们用到的KEIL有几种版本的，头文件也不同。有reg51.h和at89x51.h两种比较常见。at89x51和reg51这两个文件有点不同，reg51没有对IO口的位地址进行定义。所以我们在使用reg51的时候，可能会有一些相关语句通不过，比方说P0_1=1;这样的位操作。
 
-文件都放在Keil的KEILC\C51\INC目录下，大家可以看看自己的KEIL版本使用了哪个头文件，也有些KEIL封装了reg51和at89x51两个头文件，都可以用。/
+* 文件都放在Keil的KEILC\C51\INC目录下，大家可以看看自己的KEIL版本使用了哪个头文件，也有些KEIL封装了reg51和at89x51两个头文件，都可以用。
 
-·头文件定义在程序的第一行，方法是#include ，如果提示这个文件找不到可以改为#include 试试。
+* 头文件定义在程序的第一行，方法是#include ，如果提示这个文件找不到可以改为#include 试试。
 
-·下面是一些使用心得，网上的.使用Keil C调试某系统时积累的一些经验
+* 下面是一些使用心得，网上的.使用Keil C调试某系统时积累的一些经验
+
 
 ```
 1、在Windows2000下面，我们可以把字体设置为Courier，这样就可以显示正常。
@@ -37,11 +37,3 @@ date: 2015-05-19 06:58:18
 9、所有函数之间的相关性越低越有利于以后功能的扩展。
 10、6.20版在编译带code关键字的数组时，编译通过但是单片机运行结果是错误的，改用6.14版后正常。
 ```
-
-</div>
-</div>
-</div>
-<div id="detailArticleFooter_ptkaiapt4bxy_baiduscarticle" class="footer">
-<div class="time-cang">收藏于 2009-09-27</div>
-<div class="link-src">来自于百度空间</div>
-</div>
