@@ -15,7 +15,8 @@
       language: '<%= theme.comment.gitalk.language %>',
       enableHotKey: '<%= theme.comment.gitalk.enableHotKey %>',
       // 添加代理配置解决GitHub API访问问题和CORS限制
-      proxy: 'https://cors-anywhere.azm.workers.dev/https://github.com/login/oauth/access_token',
+      // 使用更新的代理地址解决access token获取问题
+      proxy: 'https://cors-anywhere.xingwangzhe.workers.dev/https://github.com/login/oauth/access_token',
       // 添加redirect_uri解决GitHub OAuth重定向问题
       // 请确保在GitHub OAuth应用设置中也添加了相同的URL
       redirect_uri: 'http://wanqiang.wang/'
