@@ -97,5 +97,13 @@ pagination_dir: page
 # theme: landscape
 theme: pure
 
+# hexo-generator-searchdb 搜索插件配置
+search:
+  path: search.xml
+  field: post
+  content: true
+  format: html
+  limit: 10000
+
 # Deployment configuration has been moved to GitHub Actions workflow
 # The site is now deployed using direct git commands in .github/workflows/main.yml
