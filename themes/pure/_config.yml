@@ -137,6 +137,7 @@ comment:
     distractionFreeMode: true  # 无干扰模式，不需要更改
     enableHotKey: true
     language: zh-CN
+    redirect_uri: 'https://wanqiang.wang/'
     
   valine: # Valine. https://valine.js.org
     appid:  # your leancloud application appid
