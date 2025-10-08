@@ -115,7 +115,7 @@ repository:
 # Gitment
 # Introduction: https://imsun.net/posts/gitment-introduction/
 comment:
-  type: gitalk  # 启用哪种评论系统
+  type: false  # 禁用评论系统
   disqus:  # enter disqus shortname here
   youyan: 
     uid: 1783844 # enter youyan uid 
