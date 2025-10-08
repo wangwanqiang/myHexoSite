@@ -204,9 +204,9 @@ profile:
   avatar: images/avatar.jpg
   gravatar: # Gravatar email address, if you enable Gravatar, your avatar config will be overriden
   author: Wanqiang
-  author_title: WDeveloper
+  author_title: 技术探索者
   author_description: 无话可说。
-  location: 中国
+  location: 中国.深圳
   follow: https://github.com/wangwanqiang
   # Social Links
   social:
