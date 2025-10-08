@@ -29,7 +29,7 @@ site:
     width: 40
     height: 40
     url: ../images/logo.png
-  title: Hexo # 页面title
+  title: Wanqiang.wang # 页面title
   favicon: /favicon.png
   board: <p>欢迎交流与分享经验!</p> # 站点公告
   copyright: false # 底部版权信息
@@ -232,16 +232,16 @@ profile:
     #微博: http://weibo.com/
   # My Personal Labels
   labels:
-    - 前端
+    - C++
     - 开发
     - JavaScript
-    - 博客
+    - 数据库
   # My Personal Works
   #works:
   #  name:
   #    link: http://www.example.com
   #    date: 2023
   # My Personal Projects
-  projects:
-    wangwanqiang/hexoComment: https://github.com/wangwanqiang/hexoComment
-    wangwanqiang/hexo-theme-pure: https://github.com/wangwanqiang/hexo-theme-pure
+  # projects:
+  #   wangwanqiang/hexoComment: https://github.com/wangwanqiang/hexoComment
+  #   wangwanqiang/hexo-theme-pure: https://github.com/wangwanqiang/hexo-theme-pure
