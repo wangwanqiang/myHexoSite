@@ -67,7 +67,7 @@ index_generator:
   path: ''
   per_page: 10
   order_by: -date
-  layout: ['archive', 'index']
+  layout: 'index'
   
 # Category & Tag
 default_category: uncategorized
@@ -93,8 +93,9 @@ pagination_dir: page
 # Fluid 是一款简约现代的 Hexo 主题，适合技术博客
 # 更多配置请参考：https://hexo.fluid-dev.com/docs/
 # theme: fluid
-theme: next
+# theme: next
 # theme: landscape
+theme: pure
 
 # Deployment configuration has been moved to GitHub Actions workflow
 # The site is now deployed using direct git commands in .github/workflows/main.yml
