@@ -133,6 +133,8 @@ comment:
     repo: wangwanqiang.github.io  #必须. GitHub repository.
     ClientID: 8cf70ec83c0f2297a66a  #必须. GitHub Application Client ID.
     ClientSecret: 39bce8b25292774ac59158f33fcaf06057d1dcec  #必须. GitHub Application Client Secret.
+    labels: 'gitalk' # github issue 对应的issue标签（新建一个）
+    distractionFreeMode: true  # 无干扰模式，不需要更改
     enableHotKey: true
     language: zh-CN
     

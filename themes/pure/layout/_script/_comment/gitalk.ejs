@@ -1,27 +1,17 @@
 <% if (typeof(script) !== 'undefined' && script) { %>
-  <!-- Gitalk评论系统 -->
-  <link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css">
-  <script src="//cdn.jsdelivr.net/npm/gitalk@1.7.2/dist/gitalk.min.js"></script>
-  <script src="//cdn.jsdelivr.net/npm/blueimp-md5@2.19.0/js/md5.min.js"></script>
-  <script type="text/javascript">
-    var gitalk = new Gitalk({
-      clientID: '<%= theme.comment.gitalk.ClientID %>',
-      clientSecret: '<%= theme.comment.gitalk.ClientSecret %>',
-      repo: '<%= theme.comment.gitalk.repo %>',
-      owner: '<%= theme.comment.gitalk.owner %>',
-      admin: ['<%= theme.comment.gitalk.admin %>'],
-      id: md5(location.pathname),
-      distractionFreeMode: true,
-      language: '<%= theme.comment.gitalk.language %>',
-      enableHotKey: '<%= theme.comment.gitalk.enableHotKey %>',
-      // 添加代理配置解决GitHub API访问问题和CORS限制
-      // 使用更新的代理地址解决access token获取问题
-      proxy: 'https://cors-anywhere.xingwangzhe.workers.dev/https://github.com/login/oauth/access_token',
-      // 添加redirect_uri解决GitHub OAuth重定向问题
-      // 请确保在GitHub OAuth应用设置中也添加了相同的URL
-      // 注意URL协议(http/https)必须与网站实际使用的完全一致
-      redirect_uri: 'https://wanqiang.wang/'
-    })
-    gitalk.render('comments')
-  </script>
+<link rel="stylesheet" href="https://unpkg.com/gitalk@latest/dist/gitalk.css">
+<script src="https://unpkg.com/gitalk@latest/dist/gitalk.min.js"></script>
+<script src="https://priesttomb.github.io/js/md5.min.js"></script>
+<script type="text/javascript">
+    new Gitalk({
+        clientID: '8cf70ec83c0f2297a66a',
+        clientSecret: '39bce8b25292774ac59158f33fcaf06057d1dcec',
+        repo: 'wangwanqiang.github.io',
+        owner: 'wangwanqiang',
+        admin: 'wangwanqiang',
+        id: md5(location.pathname),
+        distractionFreeMode: true
+    }).render('gitalk-container')
+</script>
+
 <% } %>
