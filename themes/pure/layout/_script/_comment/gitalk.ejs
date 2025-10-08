@@ -19,7 +19,8 @@
       proxy: 'https://cors-anywhere.xingwangzhe.workers.dev/https://github.com/login/oauth/access_token',
       // 添加redirect_uri解决GitHub OAuth重定向问题
       // 请确保在GitHub OAuth应用设置中也添加了相同的URL
-      redirect_uri: 'http://wanqiang.wang/'
+      // 注意URL协议(http/https)必须与网站实际使用的完全一致
+      redirect_uri: 'https://wanqiang.wang/'
     })
     gitalk.render('comments')
   </script>
