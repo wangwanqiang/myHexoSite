@@ -97,7 +97,7 @@ donate:
 # Share
 # weibo,qq,qzone,wechat,tencent,douban,diandian,facebook,twitter,google,linkedin
 share:
-  enable: true  # 是否启用分享
+  enable: false  # 是否启用分享
   sites: weibo,qq,wechat,facebook,twitter  # PC端显示的分享图标
   mobile_sites: weibo,qq,qzone  # 移动端显示的分享图标
 
@@ -109,7 +109,7 @@ share:
 # 项目仓库信息（将会覆盖 github 项）
 repository:
   platform: github # 托管平台（github | gitee）
-  username: cofess # 用户名
+  username: wangwanqiang # 用户名
 
 # Comment
 # Gitment
