@@ -130,7 +130,7 @@ comment:
   gitalk: # gitalk. https://gitalk.github.io/
     owner: wangwanqiang  #必须. GitHub repository 所有者，可以是个人或者组织。
     admin: wangwanqiang  #必须. GitHub repository 的所有者和合作者 (对这个 repository 有写权限的用户)。
-    repo: hexoComment  #必须. GitHub repository.
+    repo: wangwanqiang.github.io  #必须. GitHub repository.
     ClientID: 8cf70ec83c0f2297a66a  #必须. GitHub Application Client ID.
     ClientSecret: 39bce8b25292774ac59158f33fcaf06057d1dcec  #必须. GitHub Application Client Secret.
     enableHotKey: true
