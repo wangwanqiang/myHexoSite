@@ -132,7 +132,7 @@ comment:
     admin: wangwanqiang  #必须. GitHub repository 的所有者和合作者 (对这个 repository 有写权限的用户)。
     repo: hexoComment  #必须. GitHub repository.
     ClientID: 8cf70ec83c0f2297a66a  #必须. GitHub Application Client ID.
-    ClientSecret: 2c26f406e682f5cd28310d974c98f904a1ced30f  #必须. GitHub Application Client Secret.
+    ClientSecret: 39bce8b25292774ac59158f33fcaf06057d1dcec  #必须. GitHub Application Client Secret.
     enableHotKey: true
     language: zh-CN
     
