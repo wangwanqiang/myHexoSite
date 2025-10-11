@@ -1,10 +1,120 @@
 <% if (!index && theme.config.toc) { %>
-  <aside class="sidebar sidebar-toc collapse in" id="collapseToc" itemscope itemtype="http://schema.org/WPSideBar">
+  <!-- 在移动设备上默认隐藏目录，通过切换按钮控制显示 -->
+  <div class="toc-toggle-wrapper">
+    <button id="tocToggleBtn" class="btn btn-default toc-toggle-btn hidden-md hidden-lg">
+      <i class="fa fa-list"></i> 目录
+    </button>
+  </div>
+  
+  <aside class="sidebar sidebar-toc collapse" id="collapseToc" itemscope itemtype="http://schema.org/WPSideBar">
   <div class="slimContent">
     <nav id="toc" class="article-toc">
-      <h3 class="toc-title">目录</h3>
+      <div class="toc-header">
+        <h3 class="toc-title">目录</h3>
+        <button id="tocCloseBtn" class="close toc-close-btn visible-xs visible-sm">×</button>
+      </div>
       <%- toc(post.content) %>
     </nav>
   </div>
 </aside>
+
+<script type="text/javascript">
+  // 目录切换功能
+  $(document).ready(function() {
+    var tocToggleBtn = $('#tocToggleBtn');
+    var tocCloseBtn = $('#tocCloseBtn');
+    var collapseToc = $('#collapseToc');
+    
+    // 点击切换按钮显示/隐藏目录
+    tocToggleBtn.click(function() {
+      collapseToc.toggleClass('in');
+    });
+    
+    // 点击关闭按钮隐藏目录
+    tocCloseBtn.click(function() {
+      collapseToc.removeClass('in');
+    });
+    
+    // 小屏幕上点击目录项后自动关闭目录
+    $('.article-toc a').click(function() {
+      if ($(window).width() <= 767) {
+        collapseToc.removeClass('in');
+      }
+    });
+  });
+</script>
+
+<style type="text/css">
+  /* 目录切换按钮样式 */
+  .toc-toggle-wrapper {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    z-index: 1000;
+    display: none;
+  }
+  
+  .toc-toggle-btn {
+    background-color: #2196f3;
+    color: white;
+    border: none;
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    font-size: 14px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+  }
+  
+  .toc-toggle-btn:hover {
+    background-color: #1976d2;
+    transform: scale(1.1);
+  }
+  
+  /* 目录头部样式 */
+  .toc-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 15px;
+  }
+  
+  /* 关闭按钮样式 */
+  .toc-close-btn {
+    background: none;
+    border: none;
+    font-size: 24px;
+    color: #666;
+    cursor: pointer;
+    padding: 0;
+    width: 30px;
+    height: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    line-height: 1;
+  }
+  
+  .toc-close-btn:hover {
+    color: #333;
+  }
+  
+  /* 小屏幕上隐藏侧边栏，只显示切换按钮 */
+  @media (max-width: 767px) {
+    .toc-toggle-wrapper {
+      display: block;
+    }
+    
+    .sidebar-toc.in {
+      width: 80%;
+      max-width: 300px;
+      background-color: white;
+      overflow-y: auto;
+    }
+  }
+</style>
 <% } %>
