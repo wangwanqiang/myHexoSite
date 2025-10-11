@@ -19,29 +19,34 @@
 </aside>
 
 <script type="text/javascript">
-  // 目录切换功能
-  $(document).ready(function() {
-    var tocToggleBtn = $('#tocToggleBtn');
-    var tocCloseBtn = $('#tocCloseBtn');
-    var collapseToc = $('#collapseToc');
-    
-    // 点击切换按钮显示/隐藏目录
-    tocToggleBtn.click(function() {
-      collapseToc.toggleClass('in');
-    });
-    
-    // 点击关闭按钮隐藏目录
-    tocCloseBtn.click(function() {
-      collapseToc.removeClass('in');
-    });
-    
-    // 小屏幕上点击目录项后自动关闭目录
-    $('.article-toc a').click(function() {
-      if ($(window).width() <= 767) {
+  // 确保jQuery已加载
+  if (typeof jQuery !== 'undefined') {
+    // 目录切换功能
+    jQuery(document).ready(function($) {
+      var tocToggleBtn = $('#tocToggleBtn');
+      var tocCloseBtn = $('#tocCloseBtn');
+      var collapseToc = $('#collapseToc');
+      
+      // 同时支持触摸和点击事件，适配iOS设备
+      tocToggleBtn.on('touchstart click', function(e) {
+        e.preventDefault(); // 防止事件冒泡和默认行为
+        collapseToc.toggleClass('in');
+      });
+      
+      // 同时支持触摸和点击事件，适配iOS设备
+      tocCloseBtn.on('touchstart click', function(e) {
+        e.preventDefault(); // 防止事件冒泡和默认行为
         collapseToc.removeClass('in');
-      }
+      });
+      
+      // 小屏幕上点击目录项后自动关闭目录
+      $('.article-toc a').on('touchstart click', function(e) {
+        if ($(window).width() <= 767) {
+          collapseToc.removeClass('in');
+        }
+      });
     });
-  });
+  }
 </script>
 
 <style type="text/css">
