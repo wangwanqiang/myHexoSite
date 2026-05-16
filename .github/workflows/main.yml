@@ -1,4 +1,4 @@
-name: Deploy
+name: Deploy to Cloudflare Pages
 
 on: 
   push:
@@ -8,22 +8,13 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
-    name: A job to deploy blog.
+    name: Build and deploy to Cloudflare Pages
     steps:
         
     - name: Checkout
       uses: actions/checkout@v4
       with:
         submodules: true
-
-    - name: Cache node modules
-      uses: actions/cache@v4
-      id: cache
-      with:
-        path: node_modules
-        key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
-        restore-keys: |
-          ${{ runner.os }}-node-
 
     - name: Install npm nodejs
       uses: actions/setup-node@v4
@@ -34,35 +25,14 @@ jobs:
     - name: Install dependencies
       run: npm install
 
-    - name: show hexo version
-      run: npx hexo version
-        
-    - name: run generate
+    - name: Build
       run: npm run build
         
-    # 配置SSH以使用Deploy keys
-    - name: Configure SSH
-      run: |
-        mkdir -p ~/.ssh
-        # 从Repository secrets获取DEPLOY_KEY并配置为SSH密钥
-        echo "${{ secrets.DEPLOY_KEY }}" > ~/.ssh/id_rsa
-        chmod 600 ~/.ssh/id_rsa
-        # 配置known_hosts避免主机验证问题
-        ssh-keyscan github.com >> ~/.ssh/known_hosts
-        chmod 644 ~/.ssh/known_hosts
-        
-    # Deploy hexo blog website using Deploy keys
-    - name: Deploy
-      run: |
-        git config --global user.name "github-actions[bot]"
-        git config --global user.email "github-actions[bot]@users.noreply.github.com"
-        cd ./public
-        git init
-        git add -A
-        git commit -m "Update docs by GitHub Actions"
-        # 添加远程仓库
-        git remote add origin git@github.com:wangwanqiang/wangwanqiang.github.com.git
-        # 配置Git使用SSH密钥
-        git config --global core.sshCommand "ssh -i ~/.ssh/id_rsa -o StrictHostKeyChecking=no"
-        # 推送更改
-        git push --force origin master
+    - name: Deploy to Cloudflare Pages
+      uses: cloudflare/pages-action@v1
+      with:
+        apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+        accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+        projectName: wanqiang.wang
+        directory: public
+        branch: main
