@@ -5,6 +5,13 @@
   "hexo": {
     "version": "8.1.2"
   },
+  "scripts": {
+    "clean": "hexo clean",
+    "generate": "hexo generate",
+    "build": "hexo clean && hexo generate",
+    "server": "hexo server",
+    "deploy": "hexo deploy"
+  },
   "dependencies": {
     "hexo": "^8.0.0",
     "hexo-abbrlink": "^2.2.1",

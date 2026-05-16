@@ -38,9 +38,7 @@ jobs:
       run: npx hexo version
         
     - name: run generate
-      run: |
-        npx hexo clean
-        npx hexo generate
+      run: npm run build
         
     # 配置SSH以使用Deploy keys
     - name: Configure SSH
