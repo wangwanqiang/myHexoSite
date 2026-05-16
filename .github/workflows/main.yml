@@ -12,30 +12,24 @@ jobs:
     steps:
         
     - name: Checkout
-      uses: actions/checkout@v1
+      uses: actions/checkout@v4
       with:
-        submodules: true # Checkout private submodules(themes or something else).
-    
-    # Caching dependencies to speed up workflows. (GitHub will remove any cache entries that have not been accessed in over 7 days.)
+        submodules: true
+
     - name: Cache node modules
-      uses: actions/cache@v3
+      uses: actions/cache@v4
       id: cache
       with:
         path: node_modules
         key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
         restore-keys: |
           ${{ runner.os }}-node-
-    - name: Install hexo-cli
-      #if: steps.cache.outputs.cache-hit != 'true'
-      run: npm install -g hexo-cli
-      
+
     - name: Install npm nodejs
-      uses: actions/setup-node@v3
+      uses: actions/setup-node@v4
       with:
-        node-version: '20.19.0'
-     #-run: npm install
-      
-     #run: npm install
+        node-version: '20'
+        cache: 'npm'
       
     - name: show hexo version
       run: |
