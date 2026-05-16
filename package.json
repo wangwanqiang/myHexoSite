@@ -6,11 +6,11 @@
     "version": "8.1.2"
   },
   "scripts": {
-    "clean": "hexo clean",
-    "generate": "hexo generate",
-    "build": "hexo clean && hexo generate",
-    "server": "hexo server",
-    "deploy": "hexo deploy"
+    "clean": "npx hexo clean",
+    "generate": "npx hexo generate",
+    "build": "npx hexo clean && npx hexo generate",
+    "server": "npx hexo server",
+    "deploy": "npx hexo deploy"
   },
   "dependencies": {
     "hexo": "^8.0.0",
