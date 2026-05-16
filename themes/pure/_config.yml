@@ -40,10 +40,10 @@ config:
   layout: main-center # 布局方式 main-left main-center main-right
   toc: true # 是否开启文章章节目录导航
   menu_highlight: true # 是否开启当前菜单高亮显示
-  thumbnail: true # enable posts thumbnail, options: true, false
+  thumbnail: false # enable posts thumbnail, options: true, false
   excerpt_link: 阅读全文
   #New
-  isNewTabLinks: true #是否链接打开新标签页
+  isNewTabLinks: false #是否链接打开新标签页
   autoUnfold: true # 默认展开文章目录
 
 # Pagination
@@ -73,9 +73,6 @@ index_widgets:
 # widget behavior
 archive_type: 'monthly'
 show_count: true
-
-# Fancybox
-fancybox: false
 
 # Search
 search:
