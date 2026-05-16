@@ -2,7 +2,7 @@
 title: Windows远程桌面连接Linux
 url: 298.html
 id: 298
-comments: false
+comments: true
 abbrlink: d16f
 date: 2018-07-11 18:58:04
 tags:

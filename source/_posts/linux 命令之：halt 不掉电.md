@@ -5,6 +5,7 @@ categories:
   - linux
 abbrlink: 2ee1
 date: 2015-07-28 20:12:14
+comments: true
 tags:
 ---
 

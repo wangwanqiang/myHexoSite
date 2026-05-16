@@ -5,6 +5,7 @@ categories:
   - iOS
 abbrlink: aea9
 date: 2015-05-19 05:55:16
+comments: true
 tags:
 ---
 

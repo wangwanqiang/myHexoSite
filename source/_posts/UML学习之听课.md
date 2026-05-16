@@ -6,6 +6,7 @@ categories:
 tags: uml
 abbrlink: 1c1c
 date: 2015-05-19 06:54:41
+comments: true
 ---
 
 <div class="pcs-article-box_ptkaiapt4bxy_baiduscarticle">

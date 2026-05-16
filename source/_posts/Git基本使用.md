@@ -7,6 +7,7 @@ tags:
   - git
 abbrlink: d007
 date: 2016-03-08 08:27:10
+comments: true
 ---
 
 # Git 基础使用

@@ -5,6 +5,7 @@ categories:
   - IOS 开发
 abbrlink: 44f7
 date: 2015-05-24 14:42:36
+comments: true
 tags:
 ---
 

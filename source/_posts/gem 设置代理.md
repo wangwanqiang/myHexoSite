@@ -5,6 +5,7 @@ categories:
   - gem
 abbrlink: '2809'
 date: 2016-03-04 10:35:39
+comments: true
 tags:
 ---
 

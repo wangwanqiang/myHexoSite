@@ -7,6 +7,7 @@ tags:
   - Links
 abbrlink: b963
 date: 2020-05-30 02:47:10
+comments: true
 ---
 
 1. 所有Qt版本下载地址：

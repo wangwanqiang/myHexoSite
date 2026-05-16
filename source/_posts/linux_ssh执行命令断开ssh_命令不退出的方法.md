@@ -9,6 +9,7 @@ tags:
   - linux
 abbrlink: 5dbf
 date: 2015-07-19 14:16:08
+comments: true
 ---
 
 在树莓派上用ssh的 sox 命令行播放音乐，但是，退出ssh后，随着会话的关闭，播放也就停止了。在网上查找了下解决方法：

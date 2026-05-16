@@ -2,7 +2,7 @@
 title: 如何看mdstat文件
 url: 343.html
 id: 343
-comments: false
+comments: true
 abbrlink: eb10
 date: 2019-06-02 06:34:29
 tags:

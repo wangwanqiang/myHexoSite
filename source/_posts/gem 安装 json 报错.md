@@ -5,6 +5,7 @@ categories:
   - gem
 abbrlink: '7056'
 date: 2016-03-08 21:06:43
+comments: true
 tags:
 ---
 

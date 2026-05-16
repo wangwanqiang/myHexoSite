@@ -8,6 +8,7 @@ tags:
   - GUI
 abbrlink: f9be
 date: 2020-11-21 08:18:25
+comments: true
 ---
 
 通过QSS 去掉菜单前面的对勾。用颜色表示 checked 状态。

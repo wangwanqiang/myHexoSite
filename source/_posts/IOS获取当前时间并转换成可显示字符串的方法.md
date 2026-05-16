@@ -5,6 +5,7 @@ categories:
   - IOS
 abbrlink: 6ba5
 date: 2017-04-26 22:48:54
+comments: true
 tags:
 ---
 本来很简单的时，在IOS上涉及到的东西还挺多。

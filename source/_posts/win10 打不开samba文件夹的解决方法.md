@@ -5,6 +5,7 @@ categories:
   - win10
 abbrlink: 4a9e
 date: 2016-10-02 09:37:30
+comments: true
 tags:
 ---
 

@@ -5,6 +5,7 @@ categories:
   - linux
 abbrlink: efc9
 date: 2015-08-30 13:38:28
+comments: true
 tags:
 ---
 

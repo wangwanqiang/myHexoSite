@@ -5,6 +5,7 @@ categories:
   - iOS
 abbrlink: 1c55
 date: 2015-06-25 08:11:33
+comments: true
 tags:
 ---
 

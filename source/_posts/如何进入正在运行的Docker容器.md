@@ -6,6 +6,7 @@ categories:
   - 未分类
 abbrlink: '7007'
 date: 2017-04-14 19:10:02
+comments: true
 tags:
 ---
 网上有很多种方式，比如ssh什么的。但下面这种方法我认为应该是最好，最方便的。

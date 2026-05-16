@@ -5,6 +5,7 @@ categories:
   - Mac 使用
 abbrlink: e48
 date: 2016-03-06 09:05:00
+comments: true
 tags:
 ---
 

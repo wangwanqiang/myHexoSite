@@ -8,6 +8,7 @@ tags:
   - 输入法
 abbrlink: fbb2
 date: 2020-06-02 12:34:25
+comments: true
 ---
 
 # Win10 微软拼音双拼设置

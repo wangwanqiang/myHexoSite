@@ -5,6 +5,7 @@ categories:
   - 未分类
 abbrlink: 26b1
 date: 2017-10-17 14:35:06
+comments: true
 tags:
 ---
 # 建立SSH信任

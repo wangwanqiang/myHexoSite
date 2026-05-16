@@ -5,6 +5,7 @@ id: 36
 tags: IOS
 abbrlink: aea9
 date: 2015-05-19 05:55:16
+comments: true
 ---
 
 # IOS 视图控制器 

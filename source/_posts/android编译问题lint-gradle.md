@@ -6,6 +6,7 @@ tags:
   - android
 abbrlink: 53b3
 date: 2018-04-30 10:35:31
+comments: true
 ---
 
 编译时报如下的错误：

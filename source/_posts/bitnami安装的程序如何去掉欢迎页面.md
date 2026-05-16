@@ -9,6 +9,7 @@ tags:
   - redmine
 abbrlink: 9c7f
 date: 2016-10-19 19:31:48
+comments: true
 ---
 
 就是网址打开的那个页面。去掉它直接进入安装的程序。

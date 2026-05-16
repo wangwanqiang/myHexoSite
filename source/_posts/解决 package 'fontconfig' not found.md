@@ -8,6 +8,7 @@ tags:
   - compile
 abbrlink: 8e2e
 date: 2020-01-20 17:32:18
+comments: true
 ---
 
 # 解决 package 'fontconfig' not found

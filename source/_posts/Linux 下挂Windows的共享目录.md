@@ -7,6 +7,7 @@ tags:
   - linux
 abbrlink: ee8a
 date: 2016-03-02 17:41:12
+comments: true
 ---
 
 mount -t cifs -o username=windowsusername //windows machine/sharefiles /mnt/localfolder

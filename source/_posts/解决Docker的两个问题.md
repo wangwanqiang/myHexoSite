@@ -7,6 +7,7 @@ categories:
   - docker
 abbrlink: 3c14
 date: 2016-02-28 09:01:19
+comments: true
 ---
 
 解决运行docker 命令一直要用sudo的问题

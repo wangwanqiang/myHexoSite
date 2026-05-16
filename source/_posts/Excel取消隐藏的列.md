@@ -5,6 +5,7 @@ categories:
   - 百度空间的旧文章
 abbrlink: '4702'
 date: 2015-05-19 06:17:53
+comments: true
 tags:
 ---
 

@@ -8,6 +8,7 @@ tags:
   - github
 abbrlink: b7a3
 date: 2016-03-03 10:27:03
+comments: true
 ---
 
 这里用到了一个第三方的镜像：

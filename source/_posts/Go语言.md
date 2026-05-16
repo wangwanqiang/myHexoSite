@@ -7,6 +7,7 @@ tags:
   - Go
 abbrlink: aa66
 date: 2022-03-23 20:15:25
+comments: true
 ---
 
 # Go语言笔记

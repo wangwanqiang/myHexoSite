@@ -5,6 +5,7 @@ categories:
   - 未分类
 abbrlink: 217f
 date: 2016-08-16 08:58:21
+comments: true
 tags:
 ---
 一个问题浪费两次时间，真是一个悲伤的故事。

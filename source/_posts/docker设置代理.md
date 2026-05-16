@@ -8,6 +8,7 @@ tags:
   - 代理
 abbrlink: f709
 date: 2016-03-02 16:18:41
+comments: true
 ---
 
 使用下面的命令就可以设置，替换你的IP和端口。

@@ -7,6 +7,7 @@ tags:
   - c++
 abbrlink: 43cb
 date: 2015-07-10 06:55:54
+comments: true
 ---
 
 # 多重继承的指针转换问题

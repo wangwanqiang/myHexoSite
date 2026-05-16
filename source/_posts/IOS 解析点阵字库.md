@@ -5,6 +5,7 @@ categories:
   - IOS 开发
 abbrlink: '7181'
 date: 2015-05-24 14:54:04
+comments: true
 tags:
 ---
 

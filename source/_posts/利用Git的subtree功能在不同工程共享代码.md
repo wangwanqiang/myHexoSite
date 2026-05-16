@@ -7,6 +7,7 @@ tags:
   - git
 abbrlink: 278d
 date: 2016-03-05 10:26:27
+comments: true
 ---
 
 ## 1\. 第一次添加子目录，建立与git项目的关联

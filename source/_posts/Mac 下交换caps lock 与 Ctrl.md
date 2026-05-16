@@ -5,6 +5,7 @@ categories:
   - Mac 使用
 abbrlink: 9dae
 date: 2015-05-23 15:16:01
+comments: true
 tags:
 ---
 

@@ -8,6 +8,7 @@ tags:
   - tar
 abbrlink: '8e20'
 date: 2016-05-02 15:28:07
+comments: true
 ---
 
 ```

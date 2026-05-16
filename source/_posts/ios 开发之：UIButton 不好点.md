@@ -5,6 +5,7 @@ categories:
   - IOS 开发
 abbrlink: '4014'
 date: 2015-07-12 11:13:49
+comments: true
 tags:
 ---
 

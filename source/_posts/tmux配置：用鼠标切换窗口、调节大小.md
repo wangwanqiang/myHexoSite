@@ -5,6 +5,7 @@ categories:
   - linux
 abbrlink: 198e
 date: 2017-04-28 09:16:30
+comments: true
 tags:
 ---
 以下内容来自这里：[HERE](http://www.cnblogs.com/bamanzi/p/tmux-mouse-tips.html)

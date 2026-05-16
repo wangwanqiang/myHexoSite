@@ -5,6 +5,7 @@ categories:
   - linux
 abbrlink: 604c
 date: 2016-06-16 13:48:59
+comments: true
 tags:
 ---
 

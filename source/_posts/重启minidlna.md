@@ -5,6 +5,7 @@ categories:
   - linux
 abbrlink: '1252'
 date: 2016-03-21 14:52:34
+comments: true
 tags:
 ---
 

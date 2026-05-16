@@ -2,7 +2,7 @@
 title: QNAP安装Transmission下载工具
 url: 366.html
 id: 366
-comments: false
+comments: true
 tags:
   - qnap
   - 下载

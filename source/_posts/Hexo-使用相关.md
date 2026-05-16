@@ -7,6 +7,7 @@ categories:
   - tools
 abbrlink: e0b6
 date: 2017-11-04 19:36:00
+comments: true
 ---
 # 安装与配置
 

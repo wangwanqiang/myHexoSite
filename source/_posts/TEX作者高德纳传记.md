@@ -9,6 +9,7 @@ categories:
   - 人物
 abbrlink: 89ae
 date: 2025-10-12 17:39:00
+comments: true
 ---
 
 ### Donald Knuth（高德纳）：TEX排版系统之父

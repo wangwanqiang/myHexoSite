@@ -5,6 +5,7 @@ categories:
   - c++
 abbrlink: e262
 date: 2017-04-22 19:51:12
+comments: true
 tags:
 ---
 

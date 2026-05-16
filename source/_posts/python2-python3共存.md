@@ -2,7 +2,7 @@
 title: Python 2 与 Python 3 共存方案
 url: 334.html
 id: 334
-comments: false
+comments: true
 abbrlink: fedb
 date: 2019-05-22 09:28:52
 tags:

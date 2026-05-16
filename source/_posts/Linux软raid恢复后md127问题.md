@@ -9,6 +9,7 @@ tags:
   - MicroGen8
 abbrlink: 4bd9
 date: 2016-05-02 15:28:07
+comments: true
 ---
 
 1.  检查/etc/mdadm/mdadm.conf，内容是对的，但重启后，还是md127.

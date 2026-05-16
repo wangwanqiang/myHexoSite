@@ -8,6 +8,7 @@ tags:
   - linux
 abbrlink: e88e
 date: 2015-09-02 22:10:16
+comments: true
 ---
 
 首先，编辑sudo vi /etc/default/grub 文件，找到如下行:

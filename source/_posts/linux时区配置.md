@@ -6,6 +6,7 @@ categories:
   - linux
 abbrlink: f0e6
 date: 2022-04-10 12:10:16
+comments: true
 ---
 
 #### 显示当前系统时区

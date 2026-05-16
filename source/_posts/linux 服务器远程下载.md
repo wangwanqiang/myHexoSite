@@ -5,6 +5,7 @@ categories:
   - linux
 abbrlink: ac9b
 date: 2015-08-01 18:46:00
+comments: true
 tags:
 ---
 

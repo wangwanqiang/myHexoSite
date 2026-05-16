@@ -5,6 +5,7 @@ categories:
   - docker
 abbrlink: e1f9
 date: 2017-04-29 09:48:19
+comments: true
 tags:
 ---
 

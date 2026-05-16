@@ -3,6 +3,7 @@ title: zerotier重新配置
 tags: 服务器
 abbrlink: fba5
 date: 2022-04-08 07:20:08
+comments: true
 ---
 
 #### ubuntu 重新加入已有网络
