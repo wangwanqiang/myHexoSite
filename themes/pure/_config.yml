@@ -115,7 +115,7 @@ repository:
 # Gitment
 # Introduction: https://imsun.net/posts/gitment-introduction/
 comment:
-  type: false  # 禁用评论系统
+  type: giscus  # 选择评论系统: false, disqus, youyan, livere, gitment, gitalk, valine, giscus
   disqus:  # enter disqus shortname here
   youyan: 
     uid: 1783844 # enter youyan uid 
@@ -151,6 +151,18 @@ comment:
     language: zh-cn # language, available values: en, zh-cn
     visitor: false # article reading statistic
     recordIP: false # whether to record the commenter IP
+  
+  giscus: # Giscus. https://giscus.app
+    repo: wangwanqiang/myHexoSite # GitHub repository name
+    repoId: MDEwOlJlcG9zaXRvcnkxMDk0ODcyNjE= # GitHub repository ID (获取方式见下文)
+    category: Announcement # Discussion category name
+    categoryId: DIC_kwDOBoaknc4C9KQO # Category ID (获取方式见下文)
+    mapping: title # Mapping between blog post and discussion
+    reactionsEnabled: 1 # Enable reactions
+    emitMetadata: 0 # Emit metadata
+    inputPosition: bottom # Comment input position
+    theme: light # Theme
+    lang: zh-CN # Language
 
 # douban 豆瓣书单
 # Api：
