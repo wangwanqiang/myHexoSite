@@ -26,30 +26,30 @@ rss: /atom.xml
 site:
   logo:
     enabled: true
-    width: 40
-    height: 40
+    width: 50
+    height: 50
     url: ../images/logo.png
-  title: Wanqiang.wang # 页面title
+  title: Wanqiang's Blog # 页面title
   favicon: /favicon.png
-  board: <p>欢迎交流与分享经验!</p> # 站点公告
-  copyright: false # 底部版权信息
+  board: <p>欢迎来到我的技术博客，记录学习与成长的点点滴滴 💡</p> # 站点公告
+  copyright: true # 底部版权信息
 
 # config
 config:
-  skin: # 主题颜色 theme-black theme-blue theme-green theme-purple
+  skin: # 主题颜色 theme-black theme-blue theme-green theme-purple themecyan themeso
   layout: main-center # 布局方式 main-left main-center main-right
-  toc: false # 是否开启文章章节目录导航
+  toc: true # 是否开启文章章节目录导航
   menu_highlight: true # 是否开启当前菜单高亮显示
-  thumbnail: false # enable posts thumbnail, options: true, false
-  excerpt_link: Read More
+  thumbnail: true # enable posts thumbnail, options: true, false
+  excerpt_link: 阅读全文
   #New
-  isNewTabLinks: false #是否链接打开新标签页
+  isNewTabLinks: true #是否链接打开新标签页
   autoUnfold: true # 默认展开文章目录
 
 # Pagination
 pagination:
-  number: false
-  prev: 
+  number: true
+  prev:
     alwayShow: true
   next:
     alwayShow: true
@@ -82,7 +82,8 @@ search:
   insight: true # you need to install `hexo-generator-json-content` before using Insight Search
   baidu: false # you need to disable other search engines to use Baidu search
 
-# Donate
+# Fancybox
+fancybox: true
 donate:
   enable: false
   # 微信打赏
@@ -97,9 +98,9 @@ donate:
 # Share
 # weibo,qq,qzone,wechat,tencent,douban,diandian,facebook,twitter,google,linkedin
 share:
-  enable: false  # 是否启用分享
-  sites: weibo,qq,wechat,facebook,twitter  # PC端显示的分享图标
-  mobile_sites: weibo,qq,qzone  # 移动端显示的分享图标
+  enable: true  # 是否启用分享
+  sites: weibo,qq,wechat,facebook,twitter,linkedin  # PC端显示的分享图标
+  mobile_sites: weibo,qq,qzone,wechat  # 移动端显示的分享图标
 
 # Github
 # github: 
