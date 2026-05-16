@@ -31,17 +31,18 @@ jobs:
         node-version: '20'
         cache: 'npm'
       
+    - name: Install dependencies
+      run: npm install
+
     - name: show hexo version
       run: |
-        npm update
-        hexo version
+        npx hexo version
         npm outdated
-        npm fund
         
     - name: run generate
       run: |
-        hexo clean
-        hexo generate
+        npx hexo clean
+        npx hexo generate
         
     # 配置SSH以使用Deploy keys
     - name: Configure SSH
