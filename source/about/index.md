@@ -4,9 +4,6 @@ id: 71
 date: 2015-05-24 14:56:21
 comments: false
 ---
-# 关于我
-
-关于什么呢，我也不知道啊，游走在这个城里，寻找自己的出路。
 
 
 # Links
@@ -14,14 +11,6 @@ comments: false
 1. [CSDN Blog](http://blog.csdn.net/wwq100?viewmode=contents)
 1. [Qt 下载](https://download.qt.io/)
 1. [开发小工具](https://dev-tools.wanqiang.wang/)
-
-
-
-## 数据分析
-
-1. [BDP](https://me.bdp.cn/home.html)
-1. [图说](https://tushuo.baidu.com/)
-
 
 
 ## 好文
