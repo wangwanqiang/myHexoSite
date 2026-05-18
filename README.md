@@ -1,9 +1,5 @@
 # myHexoSite
 
-[![Build Status](https://travis-ci.org/wangwanqiang/myHexoSite.svg?branch=master)](https://travis-ci.org/wangwanqiang/myHexoSite)
-
-![Github Deploy Status](https://github.com/wangwanqiang/myHexoSite/actions/workflows/main.yml/badge.svg)
-
 运行网址：https://wanqiang.wang
 
 ## Hexo 文章的文件头
