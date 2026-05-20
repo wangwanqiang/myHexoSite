@@ -1483,3 +1483,1008 @@ func TestAdd(t *testing.T) {
 ```bash
 $ go test
 ```
+
+---
+
+## 泛型（Go 1.18+）
+
+Go 1.18引入了泛型支持，这是Go语言最重要的新特性之一。
+
+### 类型参数和类型约束
+
+```go
+package main
+
+import "fmt"
+
+// 类型约束：使用interface{}指定类型必须可比较
+type Comparable interface {
+    comparable
+}
+
+// 泛型函数：交换任意类型的两个值
+func Swap[T any](a, b T) (T, T) {
+    return b, a
+}
+
+// 泛型结构体
+type Stack[T any] struct {
+    items []T
+}
+
+func (s *Stack[T]) Push(item T) {
+    s.items = append(s.items, item)
+}
+
+func (s *Stack[T]) Pop() (T, bool) {
+    if len(s.items) == 0 {
+        var zero T
+        return zero, false
+    }
+    item := s.items[len(s.items)-1]
+    s.items = s.items[:len(s.items)-1]
+    return item, true
+}
+
+// 泛型接口
+type Container[T any] interface {
+    Get() T
+    Put(T)
+}
+
+// 类型约束：限制可以是哪些类型
+type Number interface {
+    int | int32 | int64 | float32 | float64
+}
+
+// 求和函数，只支持数值类型
+func Sum[T Number](nums []T) T {
+    var sum T
+    for _, n := range nums {
+        sum += n
+    }
+    return sum
+}
+
+func main() {
+    // 泛型函数调用
+    a, b := Swap(1, 2)
+    fmt.Println("Swap:", a, b)
+
+    str1, str2 := Swap("hello", "world")
+    fmt.Println("Swap string:", str1, str2)
+
+    // 泛型结构体使用
+    stack := Stack[int]{}
+    stack.Push(1)
+    stack.Push(2)
+    val, ok := stack.Pop()
+    fmt.Println("Pop:", val, ok)
+
+    // 泛型求和
+    fmt.Println("Sum int:", Sum([]int{1, 2, 3}))
+    fmt.Println("Sum float:", Sum([]float64{1.1, 2.2, 3.3}))
+}
+```
+
+### 泛型使用场景
+
+| 场景 | 示例 |
+|------|------|
+| 数据结构 | Stack, Queue, Tree, LinkedList |
+| 算法 | Sort, Filter, Map |
+| 容器 | Cache, Pool |
+| 工具函数 | Swap, Min, Max |
+
+---
+
+## 错误处理进阶
+
+Go 1.20+增强了错误处理，提供了错误链和错误组支持。
+
+### 错误包装
+
+```go
+package main
+
+import (
+    "errors"
+    "fmt"
+)
+
+// 错误包装
+func readFile(filename string) error {
+    return errors.New("file not found")
+}
+
+func processData(filename string) error {
+    err := readFile(filename)
+    if err != nil {
+        return fmt.Errorf("processData failed: %w", err)
+    }
+    return nil
+}
+
+func main() {
+    err := processData("test.txt")
+    if err != nil {
+        // errors.Is 检查错误链
+        if errors.Is(err, errors.New("file not found")) {
+            fmt.Println("文件不存在")
+        }
+
+        // errors.As 提取错误类型
+        var pathErr *errors.PathError
+        if errors.As(err, &pathErr) {
+            fmt.Println("路径错误:", pathErr.Path)
+        }
+
+        fmt.Println("完整错误:", err)
+    }
+}
+```
+
+### 错误组（Go 1.20+）
+
+```go
+package main
+
+import (
+    "errors"
+    "fmt"
+    "slices"
+)
+
+func task1() error {
+    return nil
+}
+
+func task2() error {
+    return errors.New("task2 failed")
+}
+
+func task3() error {
+    return nil
+}
+
+func main() {
+    // 使用slices.Concurrent 执行多个任务
+    errs := slices.Concurrently(false,
+        task1,
+        task2,
+        task3,
+    )
+
+    // 合并错误
+    combined := errors.Join(errs...)
+    if combined != nil {
+        fmt.Println("发生错误:", combined)
+    }
+}
+```
+
+### 自定义错误类型
+
+```go
+package main
+
+import (
+    "fmt"
+    "time"
+)
+
+// 自定义错误类型
+type ValidationError struct {
+    Field   string
+    Message string
+}
+
+func (e *ValidationError) Error() string {
+    return fmt.Sprintf("%s: %s", e.Field, e.Message)
+}
+
+type NetworkError struct {
+    Address string
+    Cause   error
+    Timeout time.Duration
+}
+
+func (e *NetworkError) Error() string {
+    return fmt.Sprintf("network error to %s: %v (timeout: %v)",
+        e.Address, e.Cause, e.Timeout)
+}
+
+func (e *NetworkError) Unwrap() error {
+    return e.Cause
+}
+
+func validate(data string) error {
+    if data == "" {
+        return &ValidationError{Field: "data", Message: "cannot be empty"}
+    }
+    return nil
+}
+
+func connect(addr string) error {
+    return &NetworkError{
+        Address: addr,
+        Cause:   errors.New("connection refused"),
+        Timeout: 5 * time.Second,
+    }
+}
+
+func main() {
+    // 验证错误
+    err := validate("")
+    if err != nil {
+        var ve *ValidationError
+        if errors.As(err, &ve) {
+            fmt.Printf("验证失败: %s - %s\n", ve.Field, ve.Message)
+        }
+    }
+
+    // 网络错误
+    err = connect("localhost:8080")
+    var ne *NetworkError
+    if errors.As(err, &ne) {
+        fmt.Printf("网络错误: 地址=%s, 超时=%v\n", ne.Address, ne.Timeout)
+    }
+}
+```
+
+---
+
+## 并发编程进阶
+
+### Context包
+
+Context用于在goroutine之间传递截止时间、取消信号和其他请求范围的值。
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "time"
+)
+
+func main() {
+    // 创建带超时的context
+    ctx, cancel := context.WithTimeout(context.Background(), 2*time.Second)
+    defer cancel()
+
+    // 创建可取消的context
+    ctx2, cancel2 := context.WithCancel(context.Background())
+
+    // 模拟长时间运行的任务
+    done := make(chan string)
+
+    go func() {
+        select {
+        case <-ctx.Done():
+            done <- "timeout"
+        case <-ctx2.Done():
+            done <- "cancelled"
+        case <-time.After(5 * time.Second):
+            done <- "completed"
+        }
+    }()
+
+    // 在1秒后取消
+    go func() {
+        time.Sleep(1 * time.Second)
+        cancel2()
+    }()
+
+    fmt.Println("Result:", <-done)
+}
+```
+
+### sync包详解
+
+```go
+package main
+
+import (
+    "fmt"
+    "sync"
+    "sync/atomic"
+    "time"
+)
+
+func syncExamples() {
+    // WaitGroup：等待一组goroutine完成
+    var wg sync.WaitGroup
+    for i := 0; i < 3; i++ {
+        wg.Add(1)
+        go func(id int) {
+            defer wg.Done()
+            fmt.Printf("Goroutine %d 完成\n", id)
+        }(i)
+    }
+    wg.Wait()
+
+    // Mutex：保护共享资源
+    var mu sync.Mutex
+    counter := 0
+    for i := 0; i < 1000; i++ {
+        go func() {
+            mu.Lock()
+            counter++
+            mu.Unlock()
+        }()
+    }
+    time.Sleep(time.Millisecond)
+    fmt.Println("Counter:", counter)
+
+    // RWMutex：读写锁，允许多个读操作并发
+    var rwmu sync.RWMutex
+    data := make(map[string]int)
+
+    // 写操作
+    rwmu.Lock()
+    data["key"] = 100
+    rwmu.Unlock()
+
+    // 读操作（可以并发）
+    rwmu.RLock()
+    fmt.Println("Read:", data["key"])
+    rwmu.RUnlock()
+
+    // Once：只执行一次
+    var once sync.Once
+    for i := 0; i < 3; i++ {
+        once.Do(func() {
+            fmt.Println("Once: 只执行一次")
+        })
+    }
+
+    // Pool：对象池，减少GC压力
+    var pool sync.Pool
+    pool.New = func() interface{} {
+        return make([]byte, 1024)
+    }
+
+    buf := pool.Get().([]byte)
+    defer pool.Put(buf)
+    fmt.Println("Pool get:", len(buf))
+
+    // Map：并发安全的map
+    var concurrentMap sync.Map
+    concurrentMap.Store("key1", "value1")
+    val, ok := concurrentMap.Load("key1")
+    fmt.Println("Map load:", val, ok)
+
+    // Atomic：原子操作
+    var atomicCounter int64
+    atomic.AddInt64(&atomicCounter, 1)
+    atomic.AddInt64(&atomicCounter, 2)
+    fmt.Println("Atomic counter:", atomic.LoadInt64(&atomicCounter))
+}
+```
+
+### Select语句
+
+```go
+package main
+
+import (
+    "fmt"
+    "time"
+)
+
+func main() {
+    // 基本select：等待多个通道
+    ch1 := make(chan string)
+    ch2 := make(chan string)
+
+    go func() {
+        time.Sleep(time.Second)
+        ch1 <- "通道1"
+    }()
+
+    go func() {
+        time.Sleep(500 * time.Millisecond)
+        ch2 <- "通道2"
+    }()
+
+    // 等待第一个完成的通道
+    select {
+    case msg := <-ch1:
+        fmt.Println("收到:", msg)
+    case msg := <-ch2:
+        fmt.Println("收到:", msg)
+    case <-time.After(100 * time.Millisecond):
+        fmt.Println("超时")
+    }
+
+    // default case：非阻塞
+    select {
+    case msg := <-ch1:
+        fmt.Println("收到:", msg)
+    default:
+        fmt.Println("没有数据")
+    }
+}
+```
+
+---
+
+## 网络编程
+
+### HTTP服务器
+
+```go
+package main
+
+import (
+    "encoding/json"
+    "fmt"
+    "net/http"
+)
+
+type Response struct {
+    Message string `json:"message"`
+    Status  int    `json:"status"`
+}
+
+func healthHandler(w http.ResponseWriter, r *http.Request) {
+    json.NewEncoder(w).Encode(Response{Message: "OK", Status: 200})
+}
+
+func main() {
+    // 注册处理器
+    http.HandleFunc("/health", healthHandler)
+
+    // 自定义ServeMux
+    mux := http.NewServeMux()
+    mux.HandleFunc("/api/", func(w http.ResponseWriter, r *http.Request) {
+        fmt.Fprintf(w, "API endpoint: %s", r.URL.Path)
+    })
+
+    // 中间件示例
+    handler := http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+        fmt.Printf("Request: %s %s\n", r.Method, r.URL.Path)
+        mux.ServeHTTP(w, r)
+    })
+
+    // 启动服务器
+    fmt.Println("Server started on :8080")
+    http.ListenAndServe(":8080", handler)
+}
+```
+
+### HTTP客户端
+
+```go
+package main
+
+import (
+    "encoding/json"
+    "fmt"
+    "io"
+    "net/http"
+    "time"
+)
+
+type Post struct {
+    UserID int    `json:"userId"`
+    ID     int    `json:"id"`
+    Title  string `json:"title"`
+    Body   string `json:"body"`
+}
+
+func httpClientExample() {
+    // 创建客户端
+    client := &http.Client{
+        Timeout: 10 * time.Second,
+    }
+
+    // GET请求
+    resp, err := client.Get("https://jsonplaceholder.typicode.com/posts/1")
+    if err != nil {
+        fmt.Println("Error:", err)
+        return
+    }
+    defer resp.Body.Close()
+
+    body, _ := io.ReadAll(resp.Body)
+    var post Post
+    json.Unmarshal(body, &post)
+    fmt.Printf("GET: %+v\n", post)
+
+    // POST请求
+    post2 := Post{UserID: 1, Title: "Test", Body: "Content"}
+    jsonData, _ := json.Marshal(post2)
+    resp, err = client.Post(
+        "https://jsonplaceholder.typicode.com/posts",
+        "application/json",
+        nil,
+    )
+    if err != nil {
+        fmt.Println("Error:", err)
+        return
+    }
+    defer resp.Body.Close()
+    fmt.Println("POST status:", resp.Status)
+}
+```
+
+---
+
+## JSON处理
+
+```go
+package main
+
+import (
+    "encoding/json"
+    "fmt"
+)
+
+type Person struct {
+    Name    string   `json:"name"`
+    Age     int      `json:"age"`
+    Email   string   `json:"email,omitempty"`
+    Skills  []string `json:"skills"`
+    Address Address  `json:"address"`
+}
+
+type Address struct {
+    City    string `json:"city"`
+    Country string `json:"country"`
+}
+
+func jsonExamples() {
+    // 结构体转JSON
+    person := Person{
+        Name:   "张三",
+        Age:    30,
+        Skills: []string{"Go", "Python"},
+        Address: Address{
+            City:    "北京",
+            Country: "中国",
+        },
+    }
+
+    // Marshal
+    jsonData, err := json.Marshal(person)
+    if err != nil {
+        fmt.Println("Error:", err)
+        return
+    }
+    fmt.Println("JSON:", string(jsonData))
+
+    // 格式化输出
+    jsonData, _ = json.MarshalIndent(person, "", "  ")
+    fmt.Println("Formatted JSON:", string(jsonData))
+
+    // JSON转结构体
+    jsonStr := `{"name":"李四","age":25,"skills":["Java","C++"],"address":{"city":"上海","country":"中国"}}`
+    var person2 Person
+    json.Unmarshal([]byte(jsonStr), &person2)
+    fmt.Printf("Parsed: %+v\n", person2)
+
+    // 使用map处理动态JSON
+    var jsonMap map[string]interface{}
+    json.Unmarshal([]byte(jsonStr), &jsonMap)
+    fmt.Println("Map:", jsonMap)
+
+    // 流式解码
+    decoder := json.NewDecoder([]Reader(""))
+    // for decoder.More() {
+    //     decoder.Decode(&result)
+    // }
+}
+```
+
+---
+
+## 依赖注入
+
+Go语言中推荐使用构造函数和接口实现依赖注入。
+
+```go
+package main
+
+import "fmt"
+
+// 接口定义
+type Logger interface {
+    Log(msg string)
+}
+
+type Storage interface {
+    Save(data string) error
+}
+
+// 具体实现
+type ConsoleLogger struct{}
+
+func (l ConsoleLogger) Log(msg string) {
+    fmt.Println("LOG:", msg)
+}
+
+type FileStorage struct {
+    filename string
+}
+
+func (f FileStorage) Save(data string) error {
+    fmt.Println("Saving to file:", f.filename)
+    return nil
+}
+
+// 服务使用接口
+type Service struct {
+    logger  Logger
+    storage Storage
+}
+
+// 构造函数注入依赖
+func NewService(logger Logger, storage Storage) *Service {
+    return &Service{
+        logger:  logger,
+        storage: storage,
+    }
+}
+
+func (s *Service) Process(data string) {
+    s.logger.Log("Processing: " + data)
+    s.storage.Save(data)
+}
+
+func main() {
+    // 手动注入
+    logger := ConsoleLogger{}
+    storage := FileStorage{filename: "data.txt"}
+    service := NewService(logger, storage)
+    service.Process("test data")
+}
+```
+
+---
+
+## 设计模式实现
+
+### 单例模式
+
+```go
+package main
+
+import (
+    "fmt"
+    "sync"
+)
+
+// 懒汉式（线程安全）
+type Singleton struct {
+    data string
+}
+
+var (
+    instance *Singleton
+    once     sync.Once
+)
+
+func GetInstance() *Singleton {
+    once.Do(func() {
+        instance = &Singleton{data: "singleton"}
+    })
+    return instance
+}
+
+func main() {
+    s1 := GetInstance()
+    s2 := GetInstance()
+    fmt.Println("Same instance:", s1 == s2)
+}
+```
+
+### 工厂模式
+
+```go
+package main
+
+import "fmt"
+
+// 产品接口
+type Product interface {
+    Use() string
+}
+
+// 具体产品
+type ConcreteProductA struct{}
+
+func (p *ConcreteProductA) Use() string {
+    return "Using Product A"
+}
+
+type ConcreteProductB struct{}
+
+func (p *ConcreteProductB) Use() string {
+    return "Using Product B"
+}
+
+// 工厂
+type Factory struct{}
+
+func (f *Factory) Create(productType string) Product {
+    switch productType {
+    case "A":
+        return &ConcreteProductA{}
+    case "B":
+        return &ConcreteProductB{}
+    default:
+        return nil
+    }
+}
+
+func main() {
+    factory := &Factory{}
+    productA := factory.Create("A")
+    productB := factory.Create("B")
+    fmt.Println(productA.Use())
+    fmt.Println(productB.Use())
+}
+```
+
+### 构建器模式
+
+```go
+package main
+
+import "fmt"
+
+type Builder interface {
+    SetName(name string) Builder
+    SetAge(age int) Builder
+    SetCity(city string) Builder
+    Build() *Person
+}
+
+type Person struct {
+    Name string
+    Age  int
+    City string
+}
+
+type personBuilder struct {
+    name string
+    age  int
+    city string
+}
+
+func (b *personBuilder) SetName(name string) Builder {
+    b.name = name
+    return b
+}
+
+func (b *personBuilder) SetAge(age int) Builder {
+    b.age = age
+    return b
+}
+
+func (b *personBuilder) SetCity(city string) Builder {
+    b.city = city
+    return b
+}
+
+func (b *personBuilder) Build() *Person {
+    return &Person{
+        Name: b.name,
+        Age:  b.age,
+        City: b.city,
+    }
+}
+
+func newPersonBuilder() *personBuilder {
+    return &personBuilder{}
+}
+
+func main() {
+    person := newPersonBuilder().
+        SetName("张三").
+        SetAge(30).
+        SetCity("北京").
+        Build()
+    fmt.Printf("%+v\n", person)
+}
+```
+
+---
+
+## 常用工具库推荐
+
+| 类别 | 库名 | 用途 |
+|------|------|------|
+| Web框架 | Gin, Echo, Fiber | HTTP服务 |
+| 数据库 | GORM, sqlx | ORM和SQL构建 |
+| CLI | Cobra, Viper | 命令行工具 |
+| 日志 | Zap, Logrus, zerolog | 高性能日志 |
+| 配置 | Viper | 配置管理 |
+| 验证 | go-playground/validator | 数据验证 |
+| Redis | go-redis | Redis客户端 |
+| gRPC | google.golang.org/grpc | RPC框架 |
+| WebSocket | gorilla/websocket | WebSocket |
+| UUID | google/uuid | UUID生成 |
+
+### Gin框架示例
+
+```go
+package main
+
+import (
+    "github.com/gin-gonic/gin"
+)
+
+func main() {
+    r := gin.Default()
+
+    r.GET("/ping", func(c *gin.Context) {
+        c.JSON(200, gin.H{"message": "pong"})
+    })
+
+    r.POST("/users", func(c *gin.Context) {
+        var user struct {
+            Name string `json:"name" binding:"required"`
+            Age  int    `json:"age"`
+        }
+        if err := c.ShouldBindJSON(&user); err != nil {
+            c.JSON(400, gin.H{"error": err.Error()})
+            return
+        }
+        c.JSON(200, gin.H{"user": user})
+    })
+
+    r.Run(":8080")
+}
+```
+
+### Zap日志库示例
+
+```go
+package main
+
+import (
+    "go.uber.org/zap"
+)
+
+var logger *zap.Logger
+
+func init() {
+    var err error
+    logger, err = zap.NewProduction()
+    if err != nil {
+        panic(err)
+    }
+    defer logger.Sync()
+}
+
+func main() {
+    logger.Info("应用程序启动",
+        zap.String("app", "myapp"),
+        zap.Int("port", 8080),
+    )
+
+    logger.Error("发生错误",
+        zap.String("error", "connection failed"),
+    )
+}
+```
+
+---
+
+## 性能优化建议
+
+### 1. 避免不必要的内存分配
+
+```go
+// 错误：每次调用都分配新切片
+func badConcat(strs []string) string {
+    result := ""
+    for _, s := range strs {
+        result += s
+    }
+    return result
+}
+
+// 正确：预分配容量
+func goodConcat(strs []string) string {
+    var builder strings.Builder
+    builder.Grow(len(strs) * 10) // 预分配
+    for _, s := range strs {
+        builder.WriteString(s)
+    }
+    return builder.String()
+}
+```
+
+### 2. 使用strings.Builder代替+
+
+```go
+// strings.Builder更高效
+var b strings.Builder
+b.WriteString("Hello")
+b.WriteString(" ")
+b.WriteString("World")
+result := b.String()
+```
+
+### 3. 使用sync.Pool复用对象
+
+```go
+var bufferPool = sync.Pool{
+    New: func() interface{} {
+        return make([]byte, 1024)
+    },
+}
+
+func process() {
+    buf := bufferPool.Get().([]byte)
+    defer bufferPool.Put(buf)
+    // 使用buf
+}
+```
+
+### 4. 避免反射，尽可能使用接口
+
+```go
+// 反射慢
+func reflectCompare(a, b interface{}) bool {
+    // 使用反射比较
+    return false
+}
+
+// 接口快
+func interfaceCompare(a, b int) bool {
+    return a == b
+}
+```
+
+---
+
+## Go语言学习路线
+
+### 入门阶段（1-2周）
+- Go语法基础（变量、数据类型、控制流）
+- 函数和错误处理
+- 结构体和方法
+- 接口
+
+### 进阶阶段（2-4周）
+- 切片和映射
+- Goroutine和Channel
+- 并发模式
+- 错误处理进阶
+
+### 高级阶段（1-2月）
+- Go模块管理
+- 测试和基准测试
+- 反射和接口设计
+- 性能优化
+
+### 实战阶段（持续）
+- Web开发（Gin/Echo）
+- 数据库编程（GORM/sqlx）
+- 微服务（gRPC、Docker、K8s）
+- DevOps工具开发
+
+---
+
+## 总结
+
+Go语言以其简洁、高效、并发友好的特点，成为现代服务端开发的重要选择。本文涵盖了Go语言的核心知识点：
+
+| 模块 | 核心内容 |
+|------|----------|
+| 基础语法 | 变量、类型、流程控制、函数 |
+| 高级特性 | 接口、泛型、错误处理 |
+| 并发 | Goroutine、Channel、sync包、Context |
+| 工具链 | go mod、go test、go fmt |
+| 标准库 | IO、网络、JSON、时间和日期 |
+| 生态系统 | Gin、GORM、Zap等常用库 |
+
+掌握这些内容后，你将能够熟练使用Go语言进行开发。需要持续实践和阅读优秀开源项目的代码，不断提升技术水平。
+
+Go语言的哲学是"简单、实用"，在学习过程中要注重实践，多写代码，多参与开源项目，才能真正掌握这门语言的精髓。
