@@ -78,6 +78,9 @@ post:
   # 评论配置
   comments:
     enable: true
+    # 评论插件类型
+    # Options: utterances | disqus | gitalk | valine | waline | changyan | livere | remark42 | twikoo | cusdis | giscus | discuss
+    type: giscus
 
 # 页脚配置
 footer:
@@ -134,24 +137,18 @@ search:
     # 是否显示顶部
     top_n_per_article: 1
 
-# 评论插件配置
-# 开启评论需要先设置上方 `post: comments: enable: true`
-comments:
-  # 评论插件类型
-  # Options: utterances | disqus | gitalk | valine | waline | changyan | livere | remark42 | twikoo | cusdis | giscus | discuss
-  type: giscus
-  
-  # Giscus 评论系统配置
-  # 基于 GitHub Discussions，类似于 Utterances
-  # See: https://giscus.app/
-  giscus:
-    repo: wangwanqiang/myHexoSite  # GitHub 仓库名
-    repo-id: MDEwOlJlcG9zaXRvcnkxMDk0ODcyNjE=  # GitHub 仓库 ID
-    category: Announcement  # Discussion 分类名
-    category-id: DIC_kwDOBoaknc4C9KQO  # 分类 ID
-    mapping: title  # 文章与讨论的映射关系
-    reactions-enabled: 1  # 启用反应功能
-    emit-metadata: 0  # 是否发送元数据
-    input-position: bottom  # 评论输入框位置
-    theme: light  # 主题
-    lang: zh-CN  # 语言
+# Giscus 评论系统配置
+# 基于 GitHub Discussions，类似于 Utterances
+# See: https://giscus.app/
+giscus:
+  repo: wangwanqiang/myHexoSite  # GitHub 仓库名
+  repo-id: MDEwOlJlcG9zaXRvcnkxMDk0ODcyNjE=  # GitHub 仓库 ID
+  category: Announcement  # Discussion 分类名
+  category-id: DIC_kwDOBoaknc4C9KQO  # 分类 ID
+  mapping: title  # 文章与讨论的映射关系
+  reactions-enabled: 1  # 启用反应功能
+  emit-metadata: 0  # 是否发送元数据
+  input-position: bottom  # 评论输入框位置
+  theme: light  # 主题
+  lang: zh-CN  # 语言
+
