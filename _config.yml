@@ -89,13 +89,9 @@ pagination_dir: page
 # Extensions
 ## Plugins: https://hexo.io/plugins/
 ## Themes: https://hexo.io/themes/
-# 已安装并使用 Fluid 主题
 # Fluid 是一款简约现代的 Hexo 主题，适合技术博客
 # 更多配置请参考：https://hexo.fluid-dev.com/docs/
-# theme: fluid
-# theme: next
-# theme: landscape
-theme: pure
+theme: fluid
 
 # hexo-generator-searchdb 搜索插件配置
 search:
