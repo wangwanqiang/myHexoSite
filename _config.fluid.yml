@@ -116,7 +116,12 @@ index:
   banner_title: "WANQIANG.WANG"
   
   # 横幅副标题
-  banner_subtitle: "技术博客 | 学习笔记 | 生活记录"
+  banner_subtitle: "Stay hungry, stay foolish."
+
+  # 首页打字机副标题
+  slogan:
+    enable: true
+    text: "Stay hungry, stay foolish."
 
 # 搜索配置
 search:
