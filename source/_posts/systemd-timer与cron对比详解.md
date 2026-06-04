@@ -1,6 +1,6 @@
 ---
 title: systemd timer 与 cron 对比详解
-date: 2026-06-03 14:00:00
+date: 2026-06-04 14:00:00
 tags:
   - Linux
   - systemd
