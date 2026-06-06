@@ -142,6 +142,13 @@ search:
     # 是否显示顶部
     top_n_per_article: 1
 
+# 网页访问统计
+web_analytics:
+  enable: true
+  follow_dnt: true
+  google:
+    measurement_id: G-BMYB5YLKN3
+
 # Giscus 评论系统配置
 # 基于 GitHub Discussions，类似于 Utterances
 # See: https://giscus.app/
