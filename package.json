@@ -33,6 +33,11 @@
     "hexo-theme-next": "^8.25.0"
   },
   "devDependencies": {
-    "hexo-cli": "^4.3.2"
+    "hexo-cli": "^4.3.2",
+    "wrangler": "^4.92.0"
+  },
+  "scripts": {
+    "deploy": "npx hexo generate && wrangler deploy",
+    "preview": "npx hexo generate && wrangler dev"
   }
 }

@@ -5,3 +5,10 @@ db.json
 node_modules/
 public/
 .deploy*/
+
+# wrangler files
+.wrangler
+.dev.vars*
+!.dev.vars.example
+.env*
+!.env.example
