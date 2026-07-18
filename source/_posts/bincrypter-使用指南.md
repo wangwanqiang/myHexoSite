@@ -186,7 +186,9 @@ BC_LOCK="echo '非法复制！程序已锁定'; exit 1" ./bincrypter -l myprogra
 
 > BC_LOCK 也支持 base64 编码的命令字符串，方便绕过命令行审查。
 
-### 5.8 锁定到指定目标机器
+> **⚠️ 注意**：`-l` 只能锁定到**执行加密的当前机器**。如需在本机打包、但只允许在**指定目标机器**上运行，请见下一节 §5.5。
+
+### 5.5 锁定到指定目标机器
 
 `-l` 默认锁定的是**当前运行 bincrypter 的机器**，它基于 `/etc/machine-id`、dmidecode UUID、MAC 地址、磁盘 UUID 等多种标识自动组合出锁密钥。但很多时候我们需要在本机打包，却只允许在**特定目标机器**上运行。bincrypter 原生不支持直接指定目标标识，但以下方案可以灵活实现。
 
@@ -350,7 +352,7 @@ PASSWORD="outer-pass" ./final_app
 
 **总结**：如果不方便改源码，推荐**方式三（双重加密）**，无需修改 bincrypter 本身，安全性也最高。方式二适合快速实现，但包装器逻辑可见。方式一适合有定制需求的高级用户。
 
-### 5.5 管道模式
+### 5.6 管道模式
 
 ```bash
 # 从管道读取，输出到文件
@@ -364,7 +366,7 @@ chmod +x mybin
 PASSWORD="foobar" ./mybin
 ```
 
-### 5.6 双重加密
+### 5.7 双重加密
 
 ```bash
 # 第一层加密
@@ -378,7 +380,7 @@ BC_PASSWORD="layer1" PASSWORD="layer2" ./myprogram
 
 > 第一层使用 `BC_PASSWORD`（该变量会传递给内部解密存根），第二层使用 `PASSWORD`。
 
-### 5.7 控制随机填充
+### 5.8 控制随机填充
 
 默认情况下，bincrypter 会添加约 25% 的随机 Padding 数据以混淆原始文件大小：
 
@@ -473,23 +475,36 @@ cp /usr/bin/nmap mynmap
 
 ### 案例 3：试用版软件授权
 
+场景：分发试用版程序，指定到期日后自动失效。
+
 ```bash
-# 编写包装脚本 check_license.sh
-cat > check_license.sh << 'EOF'
+# Step 1: 用密码加密目标程序
+PASSWORD="trial-key" ./bincrypter myapp > myapp.enc
+
+# Step 2: 编写授权启动器
+cat > launcher.sh << 'EOF'
 #!/bin/bash
-# 简单的试用到期检查
 EXPIRY="2026-12-31"
 if [ "$(date +%Y%m%d)" -gt "${EXPIRY//-/}" ]; then
-    echo "试用已到期"
+    echo "试用已到期，请联系授权"
     exit 1
 fi
-exec "$@"
+# 未到期：提供密码，执行加密程序
+PASSWORD="trial-key" exec ./myapp.enc "$@"
 EOF
 
-# 加密原始程序并绑定授权检查
-./bincrypter -l myapp
-BC_LOCK="$(cat check_license.sh | base64 -w0)" ./bincrypter -l myapp
+chmod +x launcher.sh myapp.enc
+
+# Step 3: （可选）对启动器加密，隐藏密码
+PASSWORD="outer" ./bincrypter launcher.sh > trial_app
+chmod +x trial_app
+
+# 分发到客户机器，运行：
+# PASSWORD="outer" ./trial_app
+# 流程：外层解密 → 检查到期日 → 内层解密 → 执行
 ```
+
+> **说明**：这种方案的核心是将授权逻辑放在启动器中，启动器校验通过后才提供密码解密执行真正的程序。结合 bincrypter 的双重加密，授权逻辑和密码均可被隐藏。
 
 ### 案例 4：机器标识绑定 — 分发到指定服务器
 
