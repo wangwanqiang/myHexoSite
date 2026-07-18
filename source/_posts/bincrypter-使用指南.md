@@ -64,7 +64,7 @@ comments: true
 ### 2.4 授权控制与试用版分发
 
 - 使用 `-l` 将程序锁定到当前系统 UID，防止非授权复制使用
-- 通过 **MAC 地址绑定**（配合包装脚本或修改源码）锁定到指定目标机器
+- 通过 **机器标识绑定**（machine-id、MAC 地址、磁盘序列号等）锁定到指定目标机器
 - 通过 `BC_LOCK` 设置自定义动作：锁定后退出、弹出警告或执行任意命令
 - 结合密码机制实现试用期控制（配合外部包装脚本）
 
@@ -161,7 +161,7 @@ PASSWORD=MySecretPassword ./bincrypter myprogram
 # 无任何输出，静默完成加密
 ```
 
-### 5.4 锁机 — 绑定到当前系统（本机锁定）
+### 5.4 锁机 — 绑定到当前系统
 
 ```bash
 # 锁定到当前系统 + UID
@@ -186,37 +186,48 @@ BC_LOCK="echo '非法复制！程序已锁定'; exit 1" ./bincrypter -l myprogra
 
 > BC_LOCK 也支持 base64 编码的命令字符串，方便绕过命令行审查。
 
-### 5.8 锁定到指定目标机器（MAC 地址绑定）
+### 5.8 锁定到指定目标机器
 
-`-l` 默认锁定的是**当前运行 bincrypter 的机器**（基于 `/etc/machine-id`、dmidecode UUID、MAC 地址等标识），无法直接通过一条命令锁到另一台机器。但通过以下方案可以实现在本机打包、仅限指定目标机器运行。
+`-l` 默认锁定的是**当前运行 bincrypter 的机器**，它基于 `/etc/machine-id`、dmidecode UUID、MAC 地址、磁盘 UUID 等多种标识自动组合出锁密钥。但很多时候我们需要在本机打包，却只允许在**特定目标机器**上运行。bincrypter 原生不支持直接指定目标标识，但以下方案可以灵活实现。
+
+> 所有方案均以**机器指纹**为核心——你可以选择任意能够唯一标识目标机器的特征：machine-id、MAC 地址、DMI UUID、磁盘序列号、hostid、云平台 instance-id 等。
 
 #### 方式一：修改源码，指定目标标识
 
-bincrypter 的 `_bcl_get()` 函数按顺序尝试多个机器标识来生成锁密钥。修改该函数即可锁定到任意目标机器的特征值。
+bincrypter 的 `_bcl_get()` 函数按顺序尝试多个机器标识来生成锁密钥。修改该函数，将目标机器的特征值硬编码进去即可。
 
 **Step 1：获取目标机器的标识**
 
-在目标机器上执行以下任一命令获取机器标识：
+在目标机器上执行以下任一命令，选择一个合适的标识：
 
 ```bash
-# 获取 machine-id（推荐）
+# machine-id（推荐，Linux 系统唯一且持久）
 cat /etc/machine-id
 
-# 或获取 MAC 地址
+# MAC 地址（网卡硬件地址）
 ip link show $(ip route show 1.1.1.1 | awk '{print $5}') | grep ether | awk '{print $2}'
 
-# 或获取 DMI UUID（需 root）
+# DMI UUID（主板 UUID，需 root）
 sudo dmidecode -t 1 | grep UUID
+
+# 磁盘序列号
+sudo fdisk -l 2>/dev/null | grep 'Disk identifier' | head -1
+
+# 云平台 instance-id
+# AWS:
+curl -s http://169.254.169.254/latest/meta-data/instance-id
+# Azure:
+curl -s -H "Metadata:true" http://169.254.169.254/metadata/instance/compute/vmId?api-version=2021-02-01
 ```
 
 **Step 2：修改 `_bcl_get()` 函数**
 
-编辑 bincrypter.sh，找到 `_bcl_get()` 函数（约第 230 行），将其替换为直接返回目标标识：
+编辑 bincrypter.sh，找到 `_bcl_get()` 函数（约第 230 行），将目标标识作为首选检测项：
 
 ```bash
 _bcl_get() {
-    # 直接使用目标机器的 MAC 地址
-    _bcl_verify "00:1a:2b:3c:4d:5e" && return
+    # 直接使用目标机器的标识（以 machine-id 为例）
+    _bcl_verify "目标机器的-machine-id-粘贴到这里" && return
     # 上面失败则 fallback 到真实检测
     [ -f "/etc/machine-id" ] && _bcl_verify "$(cat /etc/machine-id 2>/dev/null)" && return
     command -v dmidecode >/dev/null && _bcl_verify "$(dmidecode -t 1 2>/dev/null | LANG=C perl -ne '/UUID/ && print && exit')" && return
@@ -228,51 +239,65 @@ _bcl_get() {
 
 ```bash
 ./bincrypter -l myprogram
-# 生成的加密程序只能在 MAC 为 00:1a:2b:3c:4d:5e 的机器上运行
+# 生成的加密程序只能在携带该标识的机器上运行
 ```
 
-#### 方式二：密码加密 + MAC 校验包装器（推荐，无需改源码）
+#### 方式二：密码加密 + 标识校验包装器（推荐，无需改源码）
 
-先用密码加密程序，再编写一个包装脚本在运行时校验目标机器的 MAC 地址。
+先用密码加密程序，再编写一个包装脚本在运行时校验目标机器的标识。标识类型可自由选择。
 
 ```bash
 # Step 1: 用密码加密原始程序
 PASSWORD="MySecret" ./bincrypter myprogram
 ```
 
-创建启动器 `launcher.sh`：
+创建启动器 `launcher.sh`，选择一种或多种标识校验：
 
 ```bash
 #!/bin/bash
 # launcher.sh — 部署到目标机器
-TARGET_MAC="00:1a:2b:3c:4d:5e"
-# 获取实际 MAC
-ACTUAL_MAC=$(ip link show $(ip route show 1.1.1.1 | awk '{print $5}') 2>/dev/null | grep ether | awk '{print $2}')
+# 选择以下任意一种标识即可，组合使用更安全
 
-if [ "$ACTUAL_MAC" != "$TARGET_MAC" ]; then
-    echo "错误：未授权的机器（MAC: $ACTUAL_MAC）"
+# 选项 A：校验 machine-id
+TARGET_ID="$(cat /path/to/target-machine-id)"
+ACTUAL_ID="$(cat /etc/machine-id 2>/dev/null)"
+
+# 选项 B：校验 MAC 地址
+# TARGET_ID="00:1a:2b:3c:4d:5e"
+# ACTUAL_ID=$(ip link show $(ip route show 1.1.1.1 | awk '{print $5}') 2>/dev/null | grep ether | awk '{print $2}')
+
+# 选项 C：校验 DMI UUID（需 root）
+# TARGET_ID="4C4C4544-0050-3410-8058-B4C04F5A3332"
+# ACTUAL_ID=$(sudo dmidecode -t 1 2>/dev/null | grep UUID | awk '{print $2}')
+
+# 选项 D：校验磁盘标识
+# TARGET_ID="DISK-UUID-HERE"
+# ACTUAL_ID=$(sudo fdisk -l 2>/dev/null | grep 'Disk identifier' | head -1 | awk -F'0x' '{print $2}')
+
+if [ "$ACTUAL_ID" != "$TARGET_ID" ]; then
+    echo "错误：未授权的机器（当前标识: $ACTUAL_ID）"
     exit 1
 fi
 
-# MAC 校验通过，传入密码执行
+# 校验通过，传入密码执行
 PASSWORD="MySecret" exec ./myprogram "$@"
 ```
 
-将 `myprogram` 和 `launcher.sh` 一起分发到目标机器，目标机器上执行 `./launcher.sh` 即可。
+将 `myprogram` 和 `launcher.sh` 一起分发到目标机器，执行 `./launcher.sh` 即可。
 
-> 注意：包装器中的 MAC 校验逻辑是明文的。如需隐藏，可对包装器再次使用 bincrypter 加密（见方式三）。
+> 注意：包装器中的校验逻辑是明文的。如需隐藏，可对包装器再次使用 bincrypter 加密（见方式三）。
 
-#### 方式三：双重加密 + MAC 绑定（最强方案）
+#### 方式三：双重加密 + 标识绑定（最强方案）
 
-将 MAC 校验包装器和目标程序都加密，实现双层保护：
+将标识校验包装器和目标程序**都加密**，实现双层保护，校验逻辑对外不可见：
 
 ```bash
-# 1. 编写 MAC 校验包装器
+# 1. 编写标识校验包装器（以校验 machine-id 为例）
 cat > wrapper.sh << 'WRAPPER'
 #!/bin/bash
-TARGET_MAC="00:1a:2b:3c:4d:5e"
-ACTUAL_MAC=$(ip link show $(ip route show 1.1.1.1 | awk '{print $5}') 2>/dev/null | grep ether | awk '{print $2}')
-[ "$ACTUAL_MAC" != "$TARGET_MAC" ] && { echo "Unauthorized"; exit 1; }
+TARGET_ID="填写目标机器的machine-id"
+ACTUAL_ID="$(cat /etc/machine-id 2>/dev/null)"
+[ "$ACTUAL_ID" != "$TARGET_ID" ] && { echo "Unauthorized"; exit 1; }
 exec ./payload "$@"
 WRAPPER
 
@@ -280,8 +305,7 @@ WRAPPER
 PASSWORD="inner-pass" ./bincrypter myprogram
 mv myprogram payload
 
-# 3. 将 wrapper.sh + payload 放在同一目录
-# 4. 用 bincrypter 加密包装器（附带外层密码）
+# 3. 用外层密码加密包装器
 PASSWORD="outer-pass" ./bincrypter wrapper.sh
 mv wrapper.sh final_app
 chmod +x final_app
@@ -290,8 +314,8 @@ chmod +x final_app
 在目标机器上运行：
 
 ```bash
-# 外层解密 → 校验 MAC → 内层解密 → 执行原始程序
 PASSWORD="outer-pass" ./final_app
+# 流程：外层解密 → 校验标识 → 内层解密 → 执行
 ```
 
 **安全层级**：
@@ -301,12 +325,14 @@ PASSWORD="outer-pass" ./final_app
        │
  外层 bincrypter 解密 ← 需要 outer-pass
        │
-  wrapper.sh 校验 MAC ← 若 MAC 不匹配则退出
+  wrapper.sh 校验标识 ← 若标识不匹配则退出
        │
  内层 bincrypter 解密 ← 需要 inner-pass
        │
   原始程序执行
 ```
+
+> 提示：wrapper.sh 中可以组合校验多个标识（如 machine-id + MAC），进一步提高安全性。
 
 #### 方式四：直接在目标机器上打包
 
@@ -465,25 +491,25 @@ EOF
 BC_LOCK="$(cat check_license.sh | base64 -w0)" ./bincrypter -l myapp
 ```
 
-### 案例 4：MAC 地址绑定 — 分发到指定服务器
+### 案例 4：机器标识绑定 — 分发到指定服务器
 
-场景：开发机打包，只允许在特定生产服务器上运行。
+场景：开发机打包，只允许在特定生产服务器上运行。以校验 `/etc/machine-id` 为例。
 
 ```bash
-# Step 1: 获取目标生产服务器的 MAC 地址
+# Step 1: 获取目标生产服务器的 machine-id
 # 在目标服务器上执行：
-# ip link show eth0 | grep ether | awk '{print $2}'
-# → 00:1a:2b:3c:4d:5e
+# cat /etc/machine-id
+# → b0b0c0c0d0d0e0e0f0f0a0a0b0b0c0c0
 
-# Step 2: 编写 MAC 校验包装器
-cat > mac_launcher.sh << 'EOF'
+# Step 2: 编写标识校验包装器
+cat > id_launcher.sh << 'EOF'
 #!/bin/bash
-TARGET_MAC="00:1a:2b:3c:4d:5e"
-ACTUAL_MAC=$(ip link show $(ip route show 1.1.1.1 | awk '{print $5}') 2>/dev/null | grep ether | awk '{print $2}')
-[ "$ACTUAL_MAC" != "$TARGET_MAC" ] && {
-    echo "错误：未授权设备 (MAC: $ACTUAL_MAC)"
+TARGET_ID="b0b0c0c0d0d0e0e0f0f0a0a0b0b0c0c0"
+ACTUAL_ID="$(cat /etc/machine-id 2>/dev/null)"
+if [ "$ACTUAL_ID" != "$TARGET_ID" ]; then
+    echo "错误：未授权设备 (ID: $ACTUAL_ID)"
     exit 1
-}
+fi
 exec ./payload "$@"
 EOF
 
@@ -492,14 +518,16 @@ PASSWORD="inner-key" ./bincrypter my_server_app
 mv my_server_app payload
 
 # Step 4: 加密包装器（外层）
-PASSWORD="outer-key" ./bincrypter mac_launcher.sh
-mv mac_launcher.sh deploy_app
+PASSWORD="outer-key" ./bincrypter id_launcher.sh
+mv id_launcher.sh deploy_app
 chmod +x deploy_app
 
 # 分发 deploy_app + payload 到目标服务器
 # 运行时：
 # PASSWORD="outer-key" ./deploy_app
 ```
+
+> 可以根据需要将 machine-id 替换为 MAC 地址、DMI UUID、磁盘序列号、云平台 instance-id 等任意唯一标识。也可组合校验多个标识进一步提升安全性。
 
 ### 案例 5：CI/CD 流水线集成
 
