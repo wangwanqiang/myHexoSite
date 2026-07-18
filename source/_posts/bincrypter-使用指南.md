@@ -63,7 +63,8 @@ comments: true
 
 ### 2.4 授权控制与试用版分发
 
-- 使用 `-l` 将程序锁定到特定系统 UID，防止非授权使用
+- 使用 `-l` 将程序锁定到当前系统 UID，防止非授权复制使用
+- 通过 **MAC 地址绑定**（配合包装脚本或修改源码）锁定到指定目标机器
 - 通过 `BC_LOCK` 设置自定义动作：锁定后退出、弹出警告或执行任意命令
 - 结合密码机制实现试用期控制（配合外部包装脚本）
 
@@ -160,7 +161,7 @@ PASSWORD=MySecretPassword ./bincrypter myprogram
 # 无任何输出，静默完成加密
 ```
 
-### 5.4 锁机 — 绑定到当前系统
+### 5.4 锁机 — 绑定到当前系统（本机锁定）
 
 ```bash
 # 锁定到当前系统 + UID
@@ -184,6 +185,144 @@ BC_LOCK="echo '非法复制！程序已锁定'; exit 1" ./bincrypter -l myprogra
 - **`BC_LOCK=<命令>`**：执行指定的 Shell 命令（如 `echo`、`rm -rf` 等）
 
 > BC_LOCK 也支持 base64 编码的命令字符串，方便绕过命令行审查。
+
+### 5.8 锁定到指定目标机器（MAC 地址绑定）
+
+`-l` 默认锁定的是**当前运行 bincrypter 的机器**（基于 `/etc/machine-id`、dmidecode UUID、MAC 地址等标识），无法直接通过一条命令锁到另一台机器。但通过以下方案可以实现在本机打包、仅限指定目标机器运行。
+
+#### 方式一：修改源码，指定目标标识
+
+bincrypter 的 `_bcl_get()` 函数按顺序尝试多个机器标识来生成锁密钥。修改该函数即可锁定到任意目标机器的特征值。
+
+**Step 1：获取目标机器的标识**
+
+在目标机器上执行以下任一命令获取机器标识：
+
+```bash
+# 获取 machine-id（推荐）
+cat /etc/machine-id
+
+# 或获取 MAC 地址
+ip link show $(ip route show 1.1.1.1 | awk '{print $5}') | grep ether | awk '{print $2}'
+
+# 或获取 DMI UUID（需 root）
+sudo dmidecode -t 1 | grep UUID
+```
+
+**Step 2：修改 `_bcl_get()` 函数**
+
+编辑 bincrypter.sh，找到 `_bcl_get()` 函数（约第 230 行），将其替换为直接返回目标标识：
+
+```bash
+_bcl_get() {
+    # 直接使用目标机器的 MAC 地址
+    _bcl_verify "00:1a:2b:3c:4d:5e" && return
+    # 上面失败则 fallback 到真实检测
+    [ -f "/etc/machine-id" ] && _bcl_verify "$(cat /etc/machine-id 2>/dev/null)" && return
+    command -v dmidecode >/dev/null && _bcl_verify "$(dmidecode -t 1 2>/dev/null | LANG=C perl -ne '/UUID/ && print && exit')" && return
+    ...
+}
+```
+
+**Step 3：打包**
+
+```bash
+./bincrypter -l myprogram
+# 生成的加密程序只能在 MAC 为 00:1a:2b:3c:4d:5e 的机器上运行
+```
+
+#### 方式二：密码加密 + MAC 校验包装器（推荐，无需改源码）
+
+先用密码加密程序，再编写一个包装脚本在运行时校验目标机器的 MAC 地址。
+
+```bash
+# Step 1: 用密码加密原始程序
+PASSWORD="MySecret" ./bincrypter myprogram
+```
+
+创建启动器 `launcher.sh`：
+
+```bash
+#!/bin/bash
+# launcher.sh — 部署到目标机器
+TARGET_MAC="00:1a:2b:3c:4d:5e"
+# 获取实际 MAC
+ACTUAL_MAC=$(ip link show $(ip route show 1.1.1.1 | awk '{print $5}') 2>/dev/null | grep ether | awk '{print $2}')
+
+if [ "$ACTUAL_MAC" != "$TARGET_MAC" ]; then
+    echo "错误：未授权的机器（MAC: $ACTUAL_MAC）"
+    exit 1
+fi
+
+# MAC 校验通过，传入密码执行
+PASSWORD="MySecret" exec ./myprogram "$@"
+```
+
+将 `myprogram` 和 `launcher.sh` 一起分发到目标机器，目标机器上执行 `./launcher.sh` 即可。
+
+> 注意：包装器中的 MAC 校验逻辑是明文的。如需隐藏，可对包装器再次使用 bincrypter 加密（见方式三）。
+
+#### 方式三：双重加密 + MAC 绑定（最强方案）
+
+将 MAC 校验包装器和目标程序都加密，实现双层保护：
+
+```bash
+# 1. 编写 MAC 校验包装器
+cat > wrapper.sh << 'WRAPPER'
+#!/bin/bash
+TARGET_MAC="00:1a:2b:3c:4d:5e"
+ACTUAL_MAC=$(ip link show $(ip route show 1.1.1.1 | awk '{print $5}') 2>/dev/null | grep ether | awk '{print $2}')
+[ "$ACTUAL_MAC" != "$TARGET_MAC" ] && { echo "Unauthorized"; exit 1; }
+exec ./payload "$@"
+WRAPPER
+
+# 2. 用内层密码加密目标程序，输出为 payload
+PASSWORD="inner-pass" ./bincrypter myprogram
+mv myprogram payload
+
+# 3. 将 wrapper.sh + payload 放在同一目录
+# 4. 用 bincrypter 加密包装器（附带外层密码）
+PASSWORD="outer-pass" ./bincrypter wrapper.sh
+mv wrapper.sh final_app
+chmod +x final_app
+```
+
+在目标机器上运行：
+
+```bash
+# 外层解密 → 校验 MAC → 内层解密 → 执行原始程序
+PASSWORD="outer-pass" ./final_app
+```
+
+**安全层级**：
+
+```
+最终用户只能看到 final_app
+       │
+ 外层 bincrypter 解密 ← 需要 outer-pass
+       │
+  wrapper.sh 校验 MAC ← 若 MAC 不匹配则退出
+       │
+ 内层 bincrypter 解密 ← 需要 inner-pass
+       │
+  原始程序执行
+```
+
+#### 方式四：直接在目标机器上打包
+
+如果目标机器可访问，这是最简单的方案——直接在目标机上运行 bincrypter：
+
+```bash
+# 在目标机器上执行
+./bincrypter -l myprogram
+# 生成的程序自动锁定到本机
+```
+
+这对于 CI/CD 场景特别有用——在部署环节的目标机器上完成加密。
+
+---
+
+**总结**：如果不方便改源码，推荐**方式三（双重加密）**，无需修改 bincrypter 本身，安全性也最高。方式二适合快速实现，但包装器逻辑可见。方式一适合有定制需求的高级用户。
 
 ### 5.5 管道模式
 
@@ -326,7 +465,43 @@ EOF
 BC_LOCK="$(cat check_license.sh | base64 -w0)" ./bincrypter -l myapp
 ```
 
-### 案例 4：CI/CD 流水线集成
+### 案例 4：MAC 地址绑定 — 分发到指定服务器
+
+场景：开发机打包，只允许在特定生产服务器上运行。
+
+```bash
+# Step 1: 获取目标生产服务器的 MAC 地址
+# 在目标服务器上执行：
+# ip link show eth0 | grep ether | awk '{print $2}'
+# → 00:1a:2b:3c:4d:5e
+
+# Step 2: 编写 MAC 校验包装器
+cat > mac_launcher.sh << 'EOF'
+#!/bin/bash
+TARGET_MAC="00:1a:2b:3c:4d:5e"
+ACTUAL_MAC=$(ip link show $(ip route show 1.1.1.1 | awk '{print $5}') 2>/dev/null | grep ether | awk '{print $2}')
+[ "$ACTUAL_MAC" != "$TARGET_MAC" ] && {
+    echo "错误：未授权设备 (MAC: $ACTUAL_MAC)"
+    exit 1
+}
+exec ./payload "$@"
+EOF
+
+# Step 3: 加密目标程序（内层）
+PASSWORD="inner-key" ./bincrypter my_server_app
+mv my_server_app payload
+
+# Step 4: 加密包装器（外层）
+PASSWORD="outer-key" ./bincrypter mac_launcher.sh
+mv mac_launcher.sh deploy_app
+chmod +x deploy_app
+
+# 分发 deploy_app + payload 到目标服务器
+# 运行时：
+# PASSWORD="outer-key" ./deploy_app
+```
+
+### 案例 5：CI/CD 流水线集成
 
 ```bash
 # GitHub Actions / GitLab CI 中加密构建产物
