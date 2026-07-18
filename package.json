@@ -10,7 +10,8 @@
     "generate": "npx hexo generate",
     "build": "npx hexo clean && npx hexo generate",
     "server": "npx hexo server",
-    "deploy": "npx hexo deploy"
+    "deploy": "npm run build && wrangler deploy",
+    "preview": "npm run build && wrangler dev"
   },
   "dependencies": {
     "hexo": "^8.0.0",
@@ -33,6 +34,7 @@
     "hexo-theme-next": "^8.25.0"
   },
   "devDependencies": {
-    "hexo-cli": "^4.3.2"
+    "hexo-cli": "^4.3.2",
+    "wrangler": "^4.112.0"
   }
 }
