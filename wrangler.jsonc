@@ -1,6 +1,6 @@
 {
   "$schema": "node_modules/wrangler/config-schema.json",
-  "name": "myhexosite",
+  "name": "hexo",
   "compatibility_date": "2026-07-24",
   "assets": {
     "directory": "./public"
